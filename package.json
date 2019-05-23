@@ -7,5 +7,12 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/joi": "^15.0.2",
+    "express": "^4.16.4",
+    "lodash": "^4.17.11",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.7"
+  }
 }
