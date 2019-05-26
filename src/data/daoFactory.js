@@ -1,7 +1,7 @@
 const usuariosDAO_Arr = require('./daoUsuariosArray')
-const usuariosDAO_DB = require('./daoUsuariosDB')
+//const usuariosDAO_DB = require('./daoUsuariosDB')
 const publicacionesDAO_Arr = require('./daoPublicacionesArray')
-const publicacionesDAO_DB = require('./daoPublicacionesDB')
+//const publicacionesDAO_DB = require('./daoPublicacionesDB')
 const { mode } = require('../config')
 
 function getUsuariosDAO(){
