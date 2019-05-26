@@ -41,7 +41,7 @@ async function getByCategory(category) {
 }
 
 async function getByKeyword(keyword) {
-    //DESARROLLAR->OK // TESTEAR
+    //DESARROLLAR->OK // TESTEAR->Falta
     const publicacionesBuscadas = []
     for (const pub of publicaciones) {
         for (const key of pub.keyword) {
