@@ -41,8 +41,15 @@ async function getByCategory(category) {
 }
 
 async function getByKeyword(keyword) {
-    //DESARROLLAR
-    const publicacionesBuscadas = publicaciones.find(e => e.keyword == keyword)
+    //DESARROLLAR->OK // TESTEAR
+    const publicacionesBuscadas = []
+    for (const pub of publicaciones) {
+        for (const key of pub.keyword) {
+            if(key == keyword){
+                publicacionesBuscadas.push(pub)
+            }
+        }
+    }
     return publicacionBuscadas
 }
 
