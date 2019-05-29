@@ -6,7 +6,7 @@ const { mode } = require('../config')
 
 function getUsuariosDAO(){
     switch (mode) {
-        case 'online': return usuariosDAO_DB
+        //case 'online': return usuariosDAO_DB
         case 'offline': return usuariosDAO_Arr
         default: throw "invalid mode. check system config!"
     }
@@ -14,7 +14,7 @@ function getUsuariosDAO(){
 
 function getPublicacionesDAO(){
     switch (mode) {
-        case 'online': return publicacionesDAO_DB
+        //case 'online': return publicacionesDAO_DB
         case 'offline': return publicacionesDAO_Arr
         default: throw "invalid mode. check system config!"
     }

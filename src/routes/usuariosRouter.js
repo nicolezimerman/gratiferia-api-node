@@ -30,7 +30,7 @@ async function _handleGetAll(req, res) {
     }
 }
 
-async function _handleGetWithQS(req, res) {
+/*async function _handleGetWithQS(req, res) {
     try {
         if (isNaN(req.query.edadMin) || isNaN(req.query.edadMax))
             throw { status: 400, descripcion: 'las edades provistas no son numéricas' }
@@ -44,20 +44,20 @@ async function _handleGetWithQS(req, res) {
     } catch (err) {
         res.status(err.status).json(err)
     }
-}
+}*/
 
-router.get('/:dni', async (req, res) => {
+router.get('/:email', async (req, res) => {
     console.log(`GETTING: ${baseURI}${req.url}`)
 
     try {
-        if (isNaN(req.params.dni))
-            throw { status: 400, descripcion: 'el dni provisto no es un número o es inválido' }
+        if (!emailIsValid(req.params.email))
+            throw { status: 400, descripcion: 'el email provisto es inválido' }
 
         const usuariosDAO = daoFactory.getUsuariosDAO()
-        const resultado = await usuariosDAO.getByDni(req.params.dni)
+        const resultado = await usuariosDAO.getByEmail(req.params.email)
 
         if (!resultado)
-            throw { status: 404, descripcion: 'estudiante no encontrado' }
+            throw { status: 404, descripcion: 'usuario no encontrado' }
 
         res.json(resultado)
     } catch (err) {
@@ -71,64 +71,69 @@ router.post('/', async (req, res) => {
     try {
         const nuevo = req.body
 
-        if (esEstudianteInvalido(nuevo))
-            throw { status: 400, descripcion: 'el estudiante posee un formato json invalido o faltan datos' }
+        if (esUsuarioInvalido(nuevo))
+            throw { status: 400, descripcion: 'el usuario posee un formato json invalido o faltan datos' }
 
         const usuariosDAO = daoFactory.getUsuariosDAO()
-        const estuCreado = await usuariosDAO.add(nuevo)
-        res.status(201).json(estuCreado)
+        const userCreado = await usuariosDAO.add(nuevo)
+        res.status(201).json(userCreado)
     } catch (err) {
         res.status(err.status).json(err)
     }
 })
 
-router.delete('/:dni', async (req, res) => {
+router.delete('/:email', async (req, res) => {
     console.log(`DELETING: ${baseURI}${req.url}`)
 
     try {
-        if (isNaN(req.params.dni))
-            throw { status: 400, descripcion: 'el dni provisto no es un número o es inválido' }
+        if (!emailIsValid(req.params.email))
+            throw { status: 400, descripcion: 'el email provisto es inválido' }
 
         const usuariosDAO = daoFactory.getUsuariosDAO()
-        await usuariosDAO.deleteByDni(req.params.dni)
+        await usuariosDAO.deleteByEmail(req.params.email)
         res.status(204).send()
     } catch (err) {
         res.status(err.status).json(err)
     }
 })
 
-router.put('/:dni', async (req, res) => {
+router.put('/:email', async (req, res) => {
     console.log(`REPLACING: ${baseURI}${req.url}`)
 
     try {
-        if (isNaN(req.params.dni))
-            throw { status: 400, descripcion: 'el dni provisto no es un número o es inválido' }
+        if (!emailIsValid(req.params.email))
+            throw { status: 400, descripcion: 'el email provisto es inválido' }
 
         const nuevo = req.body
 
-        if (esEstudianteInvalido(nuevo))
-            throw { status: 400, descripcion: 'el estudiante posee un formato json invalido o faltan datos' }
+        if (esUsuarioInvalido(nuevo))
+            throw { status: 400, descripcion: 'el usuario posee un formato json invalido o faltan datos' }
 
-        if (req.params.dni != nuevo.dni)
-            throw { status: 400, descripcion: 'el dni provisto no coincide entre el recurso buscado y el nuevo' }
+        if (req.params.email != nuevo.email)
+            throw { status: 400, descripcion: 'el email provisto no coincide entre el recurso buscado y el nuevo' }
 
         const usuariosDAO = daoFactory.getUsuariosDAO()
-        const estuActualizado = await usuariosDAO.updateByDni(req.params.dni, nuevo)
-        res.json(estuActualizado)
+        const userActualizado = await usuariosDAO.updateByEmail(req.params.email, nuevo)
+        res.json(userActualizado)
     } catch (err) {
         res.status(err.status).json(err)
     }
 })
 
-function esEstudianteInvalido(estudiante) {
+function esUsuarioInvalido(usuario) {
     const schema = {
         nombre: Joi.string().alphanum().min(1).required(),
         apellido: Joi.string().alphanum().min(1).required(),
-        edad: Joi.number().integer().min(0).max(120).required(),
-        dni: Joi.number().integer().min(1).max(99999999).required()
+        zona: Joi.string().alphanum().min(1).required(),
+        email: Joi.string().email({ minDomainSegments: 2 }),
+        edad: Joi.number().integer().min(0).max(100).required()
     }
-    const { error } = Joi.validate(estudiante, schema);
+    const { error } = Joi.validate(usuario, schema);
     return error
 }
+
+function emailIsValid (email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+  }
 
 module.exports = router
