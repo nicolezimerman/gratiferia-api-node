@@ -9,7 +9,7 @@ const daoFactory = require('../data/daoFactory')
 const router = express.Router()
 
 const baseURI = '/api/publicaciones'
-
+//testGetAll
 router.get('/', async (req, res) => {
     console.log(`GETTING: ${baseURI}${req.url}`)
 
@@ -29,8 +29,8 @@ async function _handleGetAll(req, res) {
         res.status(err.status).json(err)
     }
 }
-
-/* async function _handleGetWithQS(req, res) {
+/* este tengo que modificarlo para que sea get by category/zone/keyword
+async function _handleGetWithQS(req, res) {
     try {
         if (isNaN(req.query.edadMin) || isNaN(req.query.edadMax))
             throw { status: 400, descripcion: 'las edades provistas no son numéricas' }
@@ -44,8 +44,10 @@ async function _handleGetAll(req, res) {
     } catch (err) {
         res.status(err.status).json(err)
     }
-} */
+}
+*/
 
+//testGetWithIdentifier
 router.get('/:id', async (req, res) => {
     console.log(`GETTING: ${baseURI}${req.url}`)
 
@@ -57,7 +59,7 @@ router.get('/:id', async (req, res) => {
         const resultado = await publicacionesDAO.getById(req.params.id)
 
         if (!resultado)
-            throw { status: 404, descripcion: 'publicación no encontrado' }
+            throw { status: 404, descripcion: 'publicación no encontrada' }
 
         res.json(resultado)
     } catch (err) {
@@ -65,15 +67,15 @@ router.get('/:id', async (req, res) => {
     }
 })
 
+//testPostWithBody
 router.post('/', async (req, res) => {
     console.log(`POSTING: ${baseURI}${req.url}`)
 
     try {
         const nuevo = req.body
-
         if (esPublicacionInvalida(nuevo))
             throw { status: 400, descripcion: 'la publicacion posee un formato json invalido o faltan datos' }
-
+        
         const publicacionesDAO = daoFactory.getPublicacionesDAO()
         const pubCreada = await publicacionesDAO.add(nuevo)
         res.status(201).json(pubCreada)
@@ -82,11 +84,12 @@ router.post('/', async (req, res) => {
     }
 })
 
+//testDeleteWithIdentifier
 router.delete('/:id', async (req, res) => {
     console.log(`DELETING: ${baseURI}${req.url}`)
 
     try {
-        if (isNaN(req.params.dni))
+        if (isNaN(req.params.id))
             throw { status: 400, descripcion: 'el id provisto no es un número o es inválido' }
 
         const publicacionesDAO = daoFactory.getPublicacionesDAO()
@@ -97,6 +100,7 @@ router.delete('/:id', async (req, res) => {
     }
 })
 
+//testPutWithIdentifier
 router.put('/:id', async (req, res) => {
     console.log(`REPLACING: ${baseURI}${req.url}`)
 
@@ -173,15 +177,26 @@ router.get('/:zone', async (req, res) => {
 
 function esPublicacionInvalida(publicacion) {
     const schema = {
-        title: Joi.string().alphanum().min(1).required(),
-        description: Joi.string().alphanum().min(1).required(),
+        id: Joi.number().integer().min(0).required(),
+        title: Joi.string().min(1).required(),
+        description: Joi.string().min(1).required(),
         category: Joi.string().min(1).required(),
         zone: Joi.string().min(1).required(),
         keyword: Joi.string().min(1),
-        state: Joi.string().valid('available','reserved','finished'.min(1))
+        state: Joi.string().min(1).valid('available','reserved','finished').required()
     }
     const { error } = Joi.validate(publicacion, schema);
     return error
 }
 
 module.exports = router
+/*
+{
+    "title": "Sillon 2 plazas",
+    "description": "Sillon ecocuero de dos plazas con apoya pie",
+    "category": "Muebles",
+    "zone": "Villa crespo",
+    "keyword": "Sillon",
+    "state": "available"
+}
+*/

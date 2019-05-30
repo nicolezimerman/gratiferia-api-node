@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/server.js",
-    "test": "node test/testAllEndpoints"
+    "test-usuarios": "node test/testAllEndPoints.js",
+    "test-publicaciones": "node testPublicaciones/testAllEndPoints.js"
   },
   "author": "",
   "license": "ISC",

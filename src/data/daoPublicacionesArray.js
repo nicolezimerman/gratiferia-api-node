@@ -1,4 +1,23 @@
-const publicaciones = []
+const publicaciones = [
+    {
+        id: 1,
+        title: 'Sillon 2 plazas',
+        description: 'Sillon ecocuero de dos plazas con apolla pie',
+        category: 'Muebles',
+        zone: 'Villa crespo',
+        keyword: 'Sillon',
+        state: 'available'
+    },
+    {
+        id: 2,
+        title: 'Mesa madera',
+        description: 'mesa',
+        category: 'Muebles',
+        zone: 'Almagro',
+        keyword: 'Muebles',
+        state: 'finished'
+    }
+]
 
 async function getAll() {
     return publicaciones
