@@ -70,7 +70,6 @@ router.post('/', async (req, res) => {
 
     try {
         const nuevo = req.body
-
         if (esUsuarioInvalido(nuevo))
             throw { status: 400, descripcion: 'el usuario posee un formato json invalido o faltan datos' }
 

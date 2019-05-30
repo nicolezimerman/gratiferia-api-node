@@ -1,11 +1,35 @@
-const usuarios = []
+const usuarios = [{
+    nombre: "nombreTest1",
+    apellido: "apellidoTest1",
+    edad: 18,
+    email: "test1@test.com",
+    zona: "zona1"
+},{
+    nombre: "nombreTest2",
+    apellido: "apellidoTest2",
+    edad: 22,
+    email: "test2@test.com",
+    zona: "zona2"
+},{
+    nombre: "nombreTest3",
+    apellido: "apellidoTest3",
+    edad: 42,
+    email: "test3@test.com",
+    zona: "zona3"
+},{
+    nombre: "nombreTest4",
+    apellido: "apellidoTest4",
+    edad: 23,
+    email: "test4@test.com",
+    zona: "zona4"
+}]
 
 async function getAll() {
     return usuarios
 }
 
 async function getByEmail(email) {
-    const usuarioBuscado = usuario.find(e => e.email == email)
+    const usuarioBuscado = usuarios.find(e => e.email == email)
     return usuarioBuscado
 }
 
