@@ -17,7 +17,7 @@ module.exports = async function testPutWithIdentifier(serverUrl) {
 
     const options = {
         method: 'PUT',
-        uri: `${serverUrl}/publicacions/${targetId}`,
+        uri: `${serverUrl}/publicaciones/${targetId}`,
         body: nuevaPubli,
         json: true
     };
@@ -31,22 +31,22 @@ module.exports = async function testPutWithIdentifier(serverUrl) {
         if (publicacion.id != targetId)
             throw "put: la publicacion recibida no es la reemplazada"
 
-        if (!usuario.hasOwnProperty('title'))
+        if (!publicacion.hasOwnProperty('title'))
             throw "put: la publicacion recibida no tiene titulo"
 
-        if (!usuario.hasOwnProperty('description'))
+        if (!publicacion.hasOwnProperty('description'))
             throw "put: la publicacion recibida no tiene descripcion"
 
-        if (!usuario.hasOwnProperty('category'))
+        if (!publicacion.hasOwnProperty('category'))
             throw "put: la publicacion recibida no tiene categoria"
 
-        if (!usuario.hasOwnProperty('zone'))
+        if (!publicacion.hasOwnProperty('zone'))
             throw "put: la publicacion recibida no tiene zona de retiro"
 
-        if (!usuario.hasOwnProperty('keyword'))
+        if (!publicacion.hasOwnProperty('keyword'))
             throw "put: la publicacion recibida no tiene palabra/s clave"
         
-        if (!usuario.hasOwnProperty('state'))
+        if (!publicacion.hasOwnProperty('state'))
             throw "put:  la publicacion recibida no tiene estado"
         
         console.log("put: ok")

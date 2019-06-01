@@ -29,23 +29,54 @@ async function _handleGetAll(req, res) {
         res.status(err.status).json(err)
     }
 }
-/* este tengo que modificarlo para que sea get by category/zone/keyword
+
+//Get by category/zone/keyword
 async function _handleGetWithQS(req, res) {
-    try {
-        if (isNaN(req.query.edadMin) || isNaN(req.query.edadMax))
-            throw { status: 400, descripcion: 'las edades provistas no son numéricas' }
+    var category = req.query.category
+    var keyword = req.query.keyword
+    var zone = req.query.zone
+    if(category != undefined){
+        try {
+            const publicacionesDAO = daoFactory.getPublicacionesDAO()
+            const resultado = await publicacionesDAO.getByCategory(category)
+    
+            if (!resultado)
+                throw { status: 404, descripcion: 'publicaciones no encontradas para esa categoria' }
+    
+            res.json(resultado)
+        } catch (err) {
+            res.status(err.status).json(err)
+        }
+    }else if(zone != undefined){
+        try {
+            const publicacionesDAO = daoFactory.getPublicacionesDAO()
+            const resultado = await publicacionesDAO.getByZone(zone)
 
-        if (req.query.edadMin < 0 || req.query.edadMax < 0)
-            throw { status: 400, descripcion: 'las edades provistas no son positivas' }
+            if (!resultado)
+                throw { status: 404, descripcion: 'publicacion no encontrada para esa zona' }
 
-        const publicacionesDAO = daoFactory.getPublicacionesDAO()
-        const result = await publicacionesDAO.getByAge(req.query.edadMin, req.query.edadMax)
-        res.json(result)
-    } catch (err) {
-        res.status(err.status).json(err)
+            res.json(resultado)
+        } catch (err) {
+            res.status(err.status).json(err)
+        }
+    }else if(keyword != undefined){
+        try {
+            const publicacionesDAO = daoFactory.getPublicacionesDAO()
+            const resultado = await publicacionesDAO.getByKeyword(keyword)
+    
+            if (!resultado)
+                throw { status: 404, descripcion: 'publicacion no encontrado para esa palabra clave' }
+    
+            res.json(resultado)
+        } catch (err) {
+            res.status(err.status).json(err)
+        }
+    }else{
+        res.status(400).json("no existe ninguna funcion para el parametro indicado")
     }
 }
-*/
+
+
 
 //testGetWithIdentifier
 router.get('/:id', async (req, res) => {
@@ -124,56 +155,7 @@ router.put('/:id', async (req, res) => {
     }
 })
 
-//GetByCategory
-router.get('/:category', async (req, res) => {
-    console.log(`GETTING: ${baseURI}${req.url}`)
 
-    try {
-        const publicacionesDAO = daoFactory.getpublicacionesDAO()
-        const resultado = await publicacionesDAO.getByCategory(req.params.category)
-
-        if (!resultado)
-            throw { status: 404, descripcion: 'publicaciones no encontradas para esa categoria' }
-
-        res.json(resultado)
-    } catch (err) {
-        res.status(err.status).json(err)
-    }
-})
-
-//GetByKeyword
-router.get('/:keyword', async (req, res) => {
-    console.log(`GETTING: ${baseURI}${req.url}`)
-
-    try {
-        const publicacionesDAO = daoFactory.getpublicacionesDAO()
-        const resultado = await publicacionesDAO.getByKeyword(req.params.keyword)
-
-        if (!resultado)
-            throw { status: 404, descripcion: 'publicacion no encontrado para esa palabra clave' }
-
-        res.json(resultado)
-    } catch (err) {
-        res.status(err.status).json(err)
-    }
-})
-
-//GetByZone
-router.get('/:zone', async (req, res) => {
-    console.log(`GETTING: ${baseURI}${req.url}`)
-
-    try {
-        const publicacionesDAO = daoFactory.getpublicacionesDAO()
-        const resultado = await publicacionesDAO.getByZone(req.params.zone)
-
-        if (!resultado)
-            throw { status: 404, descripcion: 'publicacion no encontrada para esa zona' }
-
-        res.json(resultado)
-    } catch (err) {
-        res.status(err.status).json(err)
-    }
-})
 
 function esPublicacionInvalida(publicacion) {
     const schema = {
@@ -182,7 +164,7 @@ function esPublicacionInvalida(publicacion) {
         description: Joi.string().min(1).required(),
         category: Joi.string().min(1).required(),
         zone: Joi.string().min(1).required(),
-        keyword: Joi.string().min(1),
+        keyword: Joi.string().min(1), //ver como validar array
         state: Joi.string().min(1).valid('available','reserved','finished').required()
     }
     const { error } = Joi.validate(publicacion, schema);
@@ -190,13 +172,3 @@ function esPublicacionInvalida(publicacion) {
 }
 
 module.exports = router
-/*
-{
-    "title": "Sillon 2 plazas",
-    "description": "Sillon ecocuero de dos plazas con apoya pie",
-    "category": "Muebles",
-    "zone": "Villa crespo",
-    "keyword": "Sillon",
-    "state": "available"
-}
-*/

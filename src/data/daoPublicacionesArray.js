@@ -5,7 +5,7 @@ const publicaciones = [
         description: 'Sillon ecocuero de dos plazas con apolla pie',
         category: 'Muebles',
         zone: 'Villa crespo',
-        keyword: 'Sillon',
+        keyword: ['Sillon'],
         state: 'available'
     },
     {
@@ -14,8 +14,26 @@ const publicaciones = [
         description: 'mesa',
         category: 'Muebles',
         zone: 'Almagro',
-        keyword: 'Muebles',
+        keyword: ['Muebles','Sillon'],
         state: 'finished'
+    },
+    {
+        id: 3,
+        title: 'Mesa maderafdsfsd',
+        description: 'mesa',
+        category: 'Mesas',
+        zone: 'Almagro',
+        keyword: ['Muebles'],
+        state: 'finished'
+    },
+    {
+        id: 4,
+        title: 'Mesa vidrio',
+        description: 'mesa',
+        category: 'Mesas',
+        zone: 'Almagro',
+        keyword: ['Mesa'],
+        state: 'available'
     }
 ]
 
@@ -55,26 +73,36 @@ async function updateById(id, nuevaPublicacion) {
 }
 
 async function getByCategory(category) {
-    const publicacionesBuscadas = publicaciones.find(e => e.category == category)
+    const publicacionesBuscadas = []
+    for (const pub of publicaciones){
+        if(pub.category == category){
+            publicacionesBuscadas.push(pub)
+        }
+    }
     return publicacionesBuscadas
 }
 
 async function getByKeyword(keyword) {
-    //DESARROLLAR->OK // TESTEAR->Falta
     const publicacionesBuscadas = []
     for (const pub of publicaciones) {
         for (const key of pub.keyword) {
             if(key == keyword){
                 publicacionesBuscadas.push(pub)
+                continue
             }
         }
     }
-    return publicacionBuscadas
+    return publicacionesBuscadas
 }
 
 async function getByZone(zone) {
-    const publicacionesBuscadas = publicaciones.find(e => e.zone == zone)
-    return publicacionBuscadas
+    const publicacionesBuscadas = []
+    for (const pub of publicaciones){
+        if(pub.zone == zone){
+            publicacionesBuscadas.push(pub)
+        }
+    }
+    return publicacionesBuscadas
 }
 
 
