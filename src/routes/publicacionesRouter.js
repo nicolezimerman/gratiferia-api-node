@@ -2,13 +2,48 @@ const express = require('express')
 const _ = require('lodash')
 const Joi = require('@hapi/joi')
 const daoFactory = require('../data/daoFactory')
-
-// const publicacionesDAO = require('../data/publicacionesDAO_Arr')
-// const publicacionesDAO = require('../data/publicacionesDAO_DB')
+//MULTER
+var multer = require('multer')
 
 const router = express.Router()
 
 const baseURI = '/api/publicaciones'
+
+//MULTER - Set storage
+var storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, 'src/public/images/uploads')
+    },
+    filename: (req, file, cb) => {
+      cb(null, Date.now() + '-' + file.originalname)
+    }
+});
+var upload = multer({storage: storage});
+
+//POST upload
+router.post('/uploadphoto', upload.single('photo'), (req, res) => {
+    console.log(req.file)
+    /*
+    try{
+    var img = fs.readFileSync(req.file.path);
+    var encode_image = img.toString('base64');
+    } catch(err){
+        console.log(err)
+    }
+    // Define a JSONobject for the image attributes for saving to database
+    var finalImg = {
+        contentType: req.file.mimetype,
+        image:  new Buffer(encode_image, 'base64')
+    };
+ */
+    res.json(result)
+})
+
+
+// const publicacionesDAO = require('../data/publicacionesDAO_Arr')
+// const publicacionesDAO = require('../data/publicacionesDAO_DB')
+
+
 //testGetAll
 router.get('/', async (req, res) => {
     console.log(`GETTING: ${baseURI}${req.url}`)

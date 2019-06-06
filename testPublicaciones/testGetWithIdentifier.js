@@ -3,7 +3,7 @@ const request = require('request-promise-native')
 async function runTest(serverUrl, targetId, expectedErrorCode){
 
     const options = {
-        uri: `${serverUrl}/publicacions/${targetId}`,
+        uri: `${serverUrl}/publicaciones/${targetId}`,
         json: true
     }
 

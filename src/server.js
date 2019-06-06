@@ -1,6 +1,6 @@
 const express = require('express')
-//const { port } = require('./config')
-const port = 8080
+const { port } = require('./config')
+//const port = 8080
 const usuariosRouter = require('./routes/usuariosRouter')
 const publicacionesRouter = require('./routes/publicacionesRouter')
 

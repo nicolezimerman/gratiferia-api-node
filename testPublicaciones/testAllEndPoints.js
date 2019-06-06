@@ -5,7 +5,7 @@ const testPostWithBody = require('./testPostWithBody')
 const testDeleteWithIdentifier = require('./testDeleteWithIdentifier')
 const testPutWithIdentifier = require('./testPutWithIdentifier')
 
-const serverUrl = 'http://127.0.0.1:8080/api'
+const serverUrl = 'http://127.0.0.1:8081/api'
 
 async function main(){
     await testPostWithBody(serverUrl)
