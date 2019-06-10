@@ -23,22 +23,16 @@ var upload = multer({storage: storage});
 //POST upload
 router.post('/uploadphoto', upload.single('photo'), (req, res) => {
     console.log(req.file)
-    /*
-    try{
-    var img = fs.readFileSync(req.file.path);
-    var encode_image = img.toString('base64');
-    } catch(err){
-        console.log(err)
-    }
-    // Define a JSONobject for the image attributes for saving to database
-    var finalImg = {
-        contentType: req.file.mimetype,
-        image:  new Buffer(encode_image, 'base64')
-    };
- */
     res.json(result)
 })
 
+//GET PHOTO
+/*
+router.get('/getphoto', async (req,res) =>{
+    console.log(`GETTING: ${baseURI}${req.url}`)
+    if(_.isEmpty(req.query))
+})
+*/
 
 // const publicacionesDAO = require('../data/publicacionesDAO_Arr')
 // const publicacionesDAO = require('../data/publicacionesDAO_DB')
@@ -142,6 +136,9 @@ router.post('/', async (req, res) => {
         if (esPublicacionInvalida(nuevo))
             throw { status: 400, descripcion: 'la publicacion posee un formato json invalido o faltan datos' }
         
+        if(nuevo.owner == nuevo.reservedby)
+            throw { status: 401, descripcion: 'el owner y el reservedby no pueden ser el mismo usuario'}
+
         const publicacionesDAO = daoFactory.getPublicacionesDAO()
         const pubCreada = await publicacionesDAO.add(nuevo)
         res.status(201).json(pubCreada)
@@ -191,7 +188,6 @@ router.put('/:id', async (req, res) => {
 })
 
 
-
 function esPublicacionInvalida(publicacion) {
     const schema = {
         id: Joi.number().integer().min(0).required(),
@@ -200,10 +196,14 @@ function esPublicacionInvalida(publicacion) {
         category: Joi.string().min(1).required(),
         zone: Joi.string().min(1).required(),
         keyword: Joi.string().min(1), //ver como validar array
-        state: Joi.string().min(1).valid('available','reserved','finished').required()
+        state: Joi.string().min(1).valid('available','reserved','finished').required(),
+        owner: Joi.string().required(),
+        reservedby: Joi.string().required(),
+        image: Joi.string().required(),
     }
     const { error } = Joi.validate(publicacion, schema);
     return error
 }
+
 
 module.exports = router

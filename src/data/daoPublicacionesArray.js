@@ -6,7 +6,9 @@ const publicaciones = [
         category: 'Muebles',
         zone: 'Villa crespo',
         keyword: ['Sillon'],
-        state: 'available'
+        state: 'available',
+        owner: 'http://localhost:8081/api/usuarios/test1@test.com',
+        reservedby: ''
     },
     {
         id: 2,
@@ -15,7 +17,9 @@ const publicaciones = [
         category: 'Muebles',
         zone: 'Almagro',
         keyword: ['Muebles','Sillon'],
-        state: 'finished'
+        state: 'finished',
+        owner: 'http://localhost:8081/api/usuarios/test2@test.com',
+        reservedby: 'http://localhost:8081/api/usuarios/test1@test.com'
     },
     {
         id: 3,
@@ -24,7 +28,9 @@ const publicaciones = [
         category: 'Mesas',
         zone: 'Almagro',
         keyword: ['Muebles'],
-        state: 'finished'
+        state: 'finished',
+        owner: 'http://localhost:8081/api/usuarios/test1@test.com',
+        reservedby: 'http://localhost:8081/api/usuarios/test3@test.com'
     },
     {
         id: 4,
@@ -33,7 +39,9 @@ const publicaciones = [
         category: 'Mesas',
         zone: 'Almagro',
         keyword: ['Mesa'],
-        state: 'available'
+        state: 'available',
+        owner: 'http://localhost:8081/api/usuarios/test1@test.com',
+        reservedby: ''
     }
 ]
 
