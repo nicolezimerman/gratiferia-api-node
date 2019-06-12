@@ -1,12 +1,12 @@
 const request = require('request-promise-native');
 
-module.exports = async function testDeleteByEmail(serverUrl) {
+module.exports = async function testDeleteById(serverUrl) {
 
-    const targetEmail = 'test1@test.com'
+    const targetId = 1
 
     const options = {
         method: 'DELETE',
-        uri: serverUrl + 'usuarios' + '/' + targetEmail,
+        uri: serverUrl + 'usuarios' + '/' + targetId,
         json: true
     }
 

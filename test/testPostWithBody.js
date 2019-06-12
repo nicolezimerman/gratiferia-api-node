@@ -3,6 +3,7 @@ const request = require('request-promise-native');
 module.exports = async function testPostWithBody(serverUrl) {
 
     const nuevoUser = {
+        id:22,
         nombre: 'facundo',
         apellido: 'aguero',
         edad: 22,
