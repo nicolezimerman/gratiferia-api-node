@@ -1,22 +1,22 @@
 const imagenes = [{
     id:1,
     path: "C:/Users/Nicole/Desktop/NickyORT/API TP2/src/public/images/original/IMG_20170214_140049.jpg",
-    self: "apellidoTest1"
+    self: "http://localhost:8081/api/imagenes/1"
 },
 {
     id:2,
     path: "/IMG_20170214_140049.jpg",
-    self: "apellidoTest2"
+    self: "http://localhost:8081/api/imagenes/2"
 },
 {
     id:3,
     path: "C:/Users/Nicole/Desktop/NickyORT/API TP2/src/public/images/original/IMG_20170214_140049.jpg",
-    self: "apellidoTest2"
+    self: "http://localhost:8081/api/imagenes/3"
 },
 {
     id:4,
     path: "C:/Users/Nicole/Desktop/NickyORT/API TP2/src/public/images/original/IMG_20170214_140049.jpg",
-    self: "apellidoTest2"
+    self: "http://localhost:8081/api/imagenes/4"
 }]
 
 //OK
@@ -48,22 +48,27 @@ async function getPaginado (resultadoParcial,cantPorPagina,page){
     }
     return imagenesBuscadas
 }
+//FALTA
+async function add(id,archivo) {
+    const imagenBuscada = await getById(id)
+    if (imagenBuscada)
+        throw { status: 400, descripcion: 'ya existe una imagen con ese id' }
 
-async function add(usuarioNuevo) {
-    const usuarioBuscado = await getById(usuarioNuevo.id)
-    if (usuarioBuscado)
-        throw { status: 400, descripcion: 'ya existe un usuario con ese id' }
-
-    usuarios.push(usuarioNuevo)
-    return usuarioNuevo
+    const imagenNueva = {}
+    imagenNueva.id = id,
+    imagenNueva.path = 'src/public/images/uploads/'+archivo.filename,
+    imagenNueva.self = '/api/imagenes/'+id
+   
+    imagenes.push(imagenNueva)
+    return imagenNueva
 }
-
+//FALTA
 async function deleteById(id) {
-    const posBuscada = usuarios.findIndex(e => e.id == id)
+    const posBuscada = imagenes.findIndex(e => e.id == id)
     if (posBuscada == -1)
-        throw { status: 404, description: 'usuario no encontrado' }
+        throw { status: 404, description: 'imagen no encontrada' }
 
-    usuarios.splice(posBuscada, 1)
+    imagenes.splice(posBuscada, 1)
 }
 
 async function updateById(id, nuevoUsuario) {

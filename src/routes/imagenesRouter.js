@@ -24,13 +24,6 @@ var storage = multer.diskStorage({
 });
 var upload = multer({storage: storage});
 
-//POST upload
-router.post('/', upload.single('photo'), (req, res) => {
-    console.log(`GETTING: ${baseURI}${req.url}`)
-    console.log(req.file)
-    res.json(result)
-})
-
 
 //GET 
 router.get('/', async (req, res) => {
@@ -89,29 +82,33 @@ router.get('/:id', async (req,res) => {
             throw { status: 404, descripcion: 'imagen no encontrada' }
         }
 
-        res.sendFile(path.resolve('./src/public/images/original' + resultado.path)) 
+        res.sendFile(path.resolve(resultado.path)) 
     } catch(err){
         res.status(400).json(err)
     }
 })
-//FALTA
-router.post('/', async (req, res) => {
-    console.log(`POSTING: ${baseURI}${req.url}`)
 
+//POST upload
+router.post('/:id', upload.single('photo'), async (req, res) => {
+    console.log(`GETTING: ${baseURI}${req.url}`)
+    console.log(req.params.id)
+    console.log(req.file)
     try {
-        const nuevo = req.body
-        if (esUsuarioInvalido(nuevo))
-            throw { status: 400, descripcion: 'el usuario posee un formato json invalido o faltan datos' }
-
-        const usuariosDAO = daoFactory.getUsuariosDAO()
-        const userCreado = await usuariosDAO.add(nuevo)
-        res.status(201).json(userCreado)
+        const id = req.params.id
+        const archivo = req.file
+        
+        //if (esPublicacionInvalida(archivo))
+        //    throw { status: 400, descripcion: 'la publicacion posee un formato json invalido o faltan datos' }
+        
+        const imagenesDAO = daoFactory.getImagenesDAO()
+        const imagenCreada = await imagenesDAO.add(id,archivo)
+        res.status(201).json(imagenCreada)
     } catch (err) {
         res.status(err.status).json(err)
     }
 })
 
-//FALTA
+//OK
 router.delete('/:id', async (req, res) => {
     console.log(`DELETING: ${baseURI}${req.url}`)
 
@@ -119,14 +116,15 @@ router.delete('/:id', async (req, res) => {
         // if (!emailIsValid(req.params.email))
         //     throw { status: 400, descripcion: 'el email provisto es inválido' }
 
-        const usuariosDAO = daoFactory.getUsuariosDAO()
-        await usuariosDAO.deleteById(req.params.id)
+        const imagenesDAO = daoFactory.getImagenesDAO()
+        await imagenesDAO.deleteById(req.params.id)
         res.status(204).send()
     } catch (err) {
         res.status(err.status).json(err)
     }
 })
 //FALTA
+/*
 router.put('/:id', async (req, res) => {
     console.log(`REPLACING: ${baseURI}${req.url}`)
 
@@ -149,7 +147,7 @@ router.put('/:id', async (req, res) => {
         res.status(err.status).json(err)
     }
 })
-
+*/
 //como validar?
 /*
 function esImagenInvalida(imagen) {
