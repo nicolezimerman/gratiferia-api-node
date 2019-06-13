@@ -2,7 +2,7 @@ const publicaciones = [
     {
         id: 1,
         title: 'Sillon 2 plazas',
-        description: 'Sillon ecocuero de dos plazas con apolla pie',
+        description: 'Sillon ecocuero de dos plazas con apoya pie',
         category: 'Muebles',
         zone: 'Villa crespo',
         keyword: ['Sillon'],
@@ -80,9 +80,15 @@ async function updateById(id, nuevaPublicacion) {
     return nuevaPublicacion
 }
 
-async function getByCategory(category) {
+async function getByCategory(category,resultadoParcial) {
+    if(resultadoParcial != undefined){
+        publicacionesParcial = resultadoParcial
+    }else{
+        publicacionesParcial = publicaciones
+    }
+
     const publicacionesBuscadas = []
-    for (const pub of publicaciones){
+    for (const pub of publicacionesParcial){
         if(pub.category == category){
             publicacionesBuscadas.push(pub)
         }
@@ -90,9 +96,16 @@ async function getByCategory(category) {
     return publicacionesBuscadas
 }
 
-async function getByKeyword(keyword) {
+async function getByKeyword(keyword,resultadoParcial) {
+    if(resultadoParcial != undefined){
+        publicacionesParcial = resultadoParcial
+    }else{
+        publicacionesParcial = publicaciones
+    }
+
     const publicacionesBuscadas = []
-    for (const pub of publicaciones) {
+
+    for (const pub of publicacionesParcial) {
         for (const key of pub.keyword) {
             if(key == keyword){
                 publicacionesBuscadas.push(pub)
@@ -103,15 +116,41 @@ async function getByKeyword(keyword) {
     return publicacionesBuscadas
 }
 
-async function getByZone(zone) {
+async function getByZone(zone,resultadoParcial) {
+    if(resultadoParcial != undefined){
+        publicacionesParcial = resultadoParcial
+    }else{
+        publicacionesParcial = publicaciones
+    }
+
     const publicacionesBuscadas = []
-    for (const pub of publicaciones){
+
+    for (const pub of publicacionesParcial){
         if(pub.zone == zone){
             publicacionesBuscadas.push(pub)
         }
     }
     return publicacionesBuscadas
 }
+
+async function getPaginado (resultadoParcial,cantPorPagina,page){
+    if(resultadoParcial != undefined){
+        publicacionesParcial = resultadoParcial
+    }else{
+        publicacionesParcial = publicaciones
+    }
+    
+    const publicacionesBuscadas = []
+    const desde = ((page - 1)*cantPorPagina)
+
+    for (let index = desde; index < (desde+cantPorPagina); index++) {
+        if(publicacionesParcial[index] != null){
+            publicacionesBuscadas.push(publicacionesParcial[index])
+        }
+    }
+    return publicacionesBuscadas
+}
+
 
 
 module.exports = {
@@ -122,5 +161,6 @@ module.exports = {
     updateById,
     getByCategory,
     getByKeyword,
-    getByZone
+    getByZone,
+    getPaginado
 }

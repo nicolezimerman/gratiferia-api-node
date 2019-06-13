@@ -64,48 +64,73 @@ async function _handleGetWithQS(req, res) {
     var category = req.query.category
     var keyword = req.query.keyword
     var zone = req.query.zone
+    var page = req.query.page
+    const cantPorPagina = 5
+    var resultadoParcial = undefined
+    //console.log(resultadoParcial == undefined)
     if(category != undefined){
+        console.log("busqueda por category")
         try {
             const publicacionesDAO = daoFactory.getPublicacionesDAO()
-            const resultado = await publicacionesDAO.getByCategory(category)
-    
-            if (!resultado)
+            resultadoParcial = await publicacionesDAO.getByCategory(category,resultadoParcial)
+
+            if (!resultadoParcial)
                 throw { status: 404, descripcion: 'publicaciones no encontradas para esa categoria' }
-    
-            res.json(resultado)
+            
+            //res.json(resultadoParcial)
         } catch (err) {
             res.status(err.status).json(err)
         }
-    }else if(zone != undefined){
+    }
+    if(zone != undefined){
+        console.log("busqueda por zone")
         try {
             const publicacionesDAO = daoFactory.getPublicacionesDAO()
-            const resultado = await publicacionesDAO.getByZone(zone)
+            resultadoParcial = await publicacionesDAO.getByZone(zone,resultadoParcial)
 
-            if (!resultado)
+            if (!resultadoParcial)
                 throw { status: 404, descripcion: 'publicacion no encontrada para esa zona' }
 
-            res.json(resultado)
+            //res.json(resultadoParcial)
         } catch (err) {
             res.status(err.status).json(err)
         }
-    }else if(keyword != undefined){
+    } 
+    if(keyword != undefined){
+        console.log("busqueda por keyword")
         try {
             const publicacionesDAO = daoFactory.getPublicacionesDAO()
-            const resultado = await publicacionesDAO.getByKeyword(keyword)
+            resultadoParcial = await publicacionesDAO.getByKeyword(keyword,resultadoParcial)
     
-            if (!resultado)
+            if (!resultadoParcial)
                 throw { status: 404, descripcion: 'publicacion no encontrado para esa palabra clave' }
     
-            res.json(resultado)
+            //res.json(resultadoParcial)
         } catch (err) {
             res.status(err.status).json(err)
         }
+    }
+    if(page != undefined){
+        console.log("paginado")
+        try{
+            const publicacionesDAO = daoFactory.getPublicacionesDAO()
+            resultadoParcial = await publicacionesDAO.getPaginado(resultadoParcial,cantPorPagina,parseInt(page))
+
+            if(!resultadoParcial)
+                throw { status: 404, descripcion: 'publicaciones no encontradas para esa página' }
+        
+            //res.json(resultadoParcial)
+        } catch (err){
+            res.status(err.status).json(err)
+        }
+    }
+    //ver como ver si esta vacio o es que no habian funciones para los parametros
+    if(resultadoParcial == undefined){
+        res.status(400).json("no existe ninguna funcion para el/los parametro/s indicado/s")
     }else{
-        res.status(400).json("no existe ninguna funcion para el parametro indicado")
+        res.json(resultadoParcial)
     }
 }
-
-
 
 //testGetWithIdentifier
 router.get('/:id', async (req, res) => {
@@ -170,7 +195,6 @@ router.put('/:id', async (req, res) => {
     try {
         if (isNaN(req.params.id))
             throw { status: 400, descripcion: 'el id provisto no es un número o es inválido' }
-
         const nuevo = req.body
 
         if (esPublicacionInvalida(nuevo))
@@ -179,6 +203,13 @@ router.put('/:id', async (req, res) => {
         if (req.params.id != nuevo.id)
             throw { status: 400, descripcion: 'el id provisto no coincide entre el recurso buscado y el nuevo' }
 
+        //CHEQUEAR -> para validar que el que actualiza sea su owner. O tiene que ir dentro del updateById en el dao?
+        if (req.params.owner != nuevo.owner)
+            throw { status: 400, descripcion: 'la publicacion solo puede ser actualizada por su owner'}
+        
+        if (nuevo.owner == nuevo.reservedby)
+            throw { status: 401, descripcion: 'el owner y el reservedby no pueden ser el mismo usuario'}
+        
         const publicacionesDAO = daoFactory.getPublicacionesDAO()
         const pubActualizada = await publicacionesDAO.updateById(req.params.id, nuevo)
         res.json(pubActualizada)
@@ -187,6 +218,7 @@ router.put('/:id', async (req, res) => {
     }
 })
 
+router.get('/')
 
 function esPublicacionInvalida(publicacion) {
     const schema = {
