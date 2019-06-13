@@ -2,37 +2,11 @@ const express = require('express')
 const _ = require('lodash')
 const Joi = require('@hapi/joi')
 const daoFactory = require('../data/daoFactory')
-//MULTER
-var multer = require('multer')
 
 const router = express.Router()
 
 const baseURI = '/api/publicaciones'
 
-//MULTER - Set storage
-var storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-      cb(null, 'src/public/images/uploads')
-    },
-    filename: (req, file, cb) => {
-      cb(null, Date.now() + '-' + file.originalname)
-    }
-});
-var upload = multer({storage: storage});
-
-//POST upload
-router.post('/uploadphoto', upload.single('photo'), (req, res) => {
-    console.log(req.file)
-    res.json(result)
-})
-
-//GET PHOTO
-/*
-router.get('/getphoto', async (req,res) =>{
-    console.log(`GETTING: ${baseURI}${req.url}`)
-    if(_.isEmpty(req.query))
-})
-*/
 
 // const publicacionesDAO = require('../data/publicacionesDAO_Arr')
 // const publicacionesDAO = require('../data/publicacionesDAO_DB')

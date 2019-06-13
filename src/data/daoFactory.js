@@ -1,6 +1,7 @@
 const usuariosDAO_Arr = require('./daoUsuariosArray')
 //const usuariosDAO_DB = require('./daoUsuariosDB')
 const publicacionesDAO_Arr = require('./daoPublicacionesArray')
+const imagenesDAO_Arr = require('./daoImagenesArray')
 //const publicacionesDAO_DB = require('./daoPublicacionesDB')
 //const { mode } = require('../config')
 const mode  = 'offline';
@@ -21,7 +22,16 @@ function getPublicacionesDAO(){
     }
 }
 
+function getImagenesDAO(){
+    switch (mode) {
+        //case 'online': return imagenesDAO_DB
+        case 'offline': return imagenesDAO_Arr
+        default: throw "invalid mode. check system config!"
+    }
+}
+
 module.exports = {
     getUsuariosDAO,
-    getPublicacionesDAO
+    getPublicacionesDAO,
+    getImagenesDAO
 }
