@@ -1,21 +1,21 @@
 const imagenes = [{
     id:1,
-    path: "C:/Users/Nicole/Desktop/NickyORT/API TP2/src/public/images/original/IMG_20170214_140049.jpg",
+    path: "src/public/images/original/IMG_20170214_140049.jpg",
     self: "http://localhost:8081/api/imagenes/1"
 },
 {
     id:2,
-    path: "/IMG_20170214_140049.jpg",
+    path: "src/public/images/original/IMG_20170214_140049.jpg",
     self: "http://localhost:8081/api/imagenes/2"
 },
 {
     id:3,
-    path: "C:/Users/Nicole/Desktop/NickyORT/API TP2/src/public/images/original/IMG_20170214_140049.jpg",
+    path: "src/public/images/original/IMG_20170214_140049.jpg",
     self: "http://localhost:8081/api/imagenes/3"
 },
 {
     id:4,
-    path: "C:/Users/Nicole/Desktop/NickyORT/API TP2/src/public/images/original/IMG_20170214_140049.jpg",
+    path: "src/public/images/original/IMG_20170214_140049.jpg",
     self: "http://localhost:8081/api/imagenes/4"
 }]
 
@@ -57,7 +57,7 @@ async function add(id,archivo) {
     const imagenNueva = {}
     imagenNueva.id = id,
     imagenNueva.path = 'src/public/images/uploads/'+archivo.filename,
-    imagenNueva.self = '/api/imagenes/'+id
+    imagenNueva.self = 'http://localhost:8081/api/imagenes/'+id
    
     imagenes.push(imagenNueva)
     return imagenNueva

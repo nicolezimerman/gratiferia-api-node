@@ -7,8 +7,9 @@ const publicaciones = [
         zone: 'Villa crespo',
         keyword: ['Sillon'],
         state: 'available',
-        owner: 'http://localhost:8081/api/usuarios/test1@test.com',
-        reservedby: ''
+        owner: 'http://localhost:8081/api/usuarios/2',
+        reservedby: '',
+        image: ''
     },
     {
         id: 2,
@@ -16,10 +17,11 @@ const publicaciones = [
         description: 'mesa',
         category: 'Muebles',
         zone: 'Almagro',
-        keyword: ['Muebles','Sillon'],
+        keyword: 'Muebles',
         state: 'finished',
-        owner: 'http://localhost:8081/api/usuarios/test2@test.com',
-        reservedby: 'http://localhost:8081/api/usuarios/test1@test.com'
+        owner: 'http://localhost:8081/api/usuarios/1',
+        reservedby: 'http://localhost:8081/api/usuarios/2',
+        image:''
     },
     {
         id: 3,
@@ -29,8 +31,9 @@ const publicaciones = [
         zone: 'Almagro',
         keyword: ['Muebles'],
         state: 'finished',
-        owner: 'http://localhost:8081/api/usuarios/test1@test.com',
-        reservedby: 'http://localhost:8081/api/usuarios/test3@test.com'
+        owner: 'http://localhost:8081/api/usuarios/2',
+        reservedby: 'http://localhost:8081/api/usuarios/3',
+        image: ''
     },
     {
         id: 4,
@@ -41,7 +44,8 @@ const publicaciones = [
         keyword: ['Mesa'],
         state: 'available',
         owner: 'http://localhost:8081/api/usuarios/test1@test.com',
-        reservedby: ''
+        reservedby: '',
+        image: ''
     }
 ]
 
@@ -79,6 +83,29 @@ async function updateById(id, nuevaPublicacion) {
     publicaciones.splice(posBuscada, 1, nuevaPublicacion)
     return nuevaPublicacion
 }
+
+async function searchWithParameters(parametros){
+    console.log(parametros)
+   
+    const publicacionesBuscadas = []
+
+    function match(item, filter) {
+        var keys = Object.keys(filter);
+        // true if any true
+        return keys.every(function (key) {
+          return item[key] == filter[key];
+        });
+    }
+
+    publicaciones.forEach(function(obj) {
+        if(match(obj, parametros)){
+            publicacionesBuscadas.push(obj)
+        }      
+    })
+
+    return publicacionesBuscadas
+}
+
 
 async function getByCategory(category,resultadoParcial) {
     if(resultadoParcial != undefined){
@@ -162,5 +189,6 @@ module.exports = {
     getByCategory,
     getByKeyword,
     getByZone,
-    getPaginado
+    getPaginado,
+    searchWithParameters
 }

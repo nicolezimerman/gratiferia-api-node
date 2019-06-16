@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
     if (_.isEmpty(req.query)) {
         _handleGetAll(req, res)
     } else {
-        _handleGetWithQS(req, res)
+        _handleGetWithQSNew(req, res)
     }
 })
 
@@ -104,6 +104,43 @@ async function _handleGetWithQS(req, res) {
     }else{
         res.json(resultadoParcial)
     }
+}
+
+async function _handleGetWithQSNew(req, res) {
+    console.log("busqueda con filtros parametrizada")
+    var parametros = req.query
+    var page = parametros.page
+    const cantPorPagina = 2
+    delete parametros.page
+    console.log(parametros)
+    console.log('page: ' + page)
+    var resultado = undefined
+
+    try {
+        const publicacionesDAO = daoFactory.getPublicacionesDAO()
+        resultado = await publicacionesDAO.searchWithParameters(parametros)
+
+        if (!resultado)
+            throw { status: 404, descripcion: 'publicaciones no encontradas para esa busqueda' }
+        
+        //res.json(resultado)
+    } catch (err) {
+        res.status(err.status).json(err)
+    } 
+    if(page != undefined && resultado != undefined){
+        try {
+            const publicacionesDAO = daoFactory.getPublicacionesDAO()
+            resultado = await publicacionesDAO.getPaginado(resultado,cantPorPagina,page)
+            
+            if(!resultado || (resultado.length === 0))
+                throw { status: 404, descripcion: 'publicaciones no encontradas para esa pagina' }
+        
+            //res.json(resultado)        
+        } catch (err) {
+            res.status(err.status).json(err)
+        }
+    }
+    res.json(resultado)
 }
 
 //testGetWithIdentifier
@@ -192,8 +229,6 @@ router.put('/:id', async (req, res) => {
     }
 })
 
-router.get('/')
-
 function esPublicacionInvalida(publicacion) {
     const schema = {
         id: Joi.number().integer().min(0).required(),
@@ -205,7 +240,7 @@ function esPublicacionInvalida(publicacion) {
         state: Joi.string().min(1).valid('available','reserved','finished').required(),
         owner: Joi.string().required(),
         reservedby: Joi.string().required(),
-        image: Joi.string().required(),
+        image: Joi.string()
     }
     const { error } = Joi.validate(publicacion, schema);
     return error
