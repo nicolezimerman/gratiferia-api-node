@@ -15,8 +15,10 @@ module.exports = async function testDeleteById(serverUrl) {
         if (body)
             throw "delete: unexpected response"
         
-        console.log('delete: ok')
+        //console.log('delete: ok')
+        return "ok"
     } catch (err) {
-        console.log(err)
+        //console.log(err)
+        return "DeleteById -- " +err.message
     }
 }

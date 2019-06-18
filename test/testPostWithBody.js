@@ -39,9 +39,12 @@ module.exports = async function testPostWithBody(serverUrl) {
         if (!usuario.hasOwnProperty('zona'))
             throw "post: el usuario recibido no tiene zona"
 
-        console.log("post: ok")
+        // console.log("post: ok")
+
+        return "ok"
 
     } catch (err) {
-        console.log(err)
+        // console.log(err)
+        return "PostWithBody -- " +err.message
     }
 }

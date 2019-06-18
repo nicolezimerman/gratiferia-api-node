@@ -30,12 +30,15 @@ module.exports = async function testGetPaginado(serverUrl) {
         // if (!usuario.hasOwnProperty('zona'))
         //     throw "get paginado: el usuario recibido no tiene zona"
 
-        console.log("get paginado: ok " + "usuarios:" + usuarios.length)
+        //console.log("get paginado: ok " + "usuarios:" + usuarios.length)
+
+        return "ok"
 
     } catch (err) {
         if (err.status == 404)
             console.log("get paginado: ok (not found)")
         else
-            console.log(err)
+            // console.log(err)
+            return "GetPaginado -- " +err.message
     }
 }

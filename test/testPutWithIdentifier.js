@@ -42,9 +42,12 @@ module.exports = async function testPutWithIdentifier(serverUrl) {
         if (!usuario.hasOwnProperty('email'))
             throw "put: el usuario recibido no tiene email"
 
-        console.log("put: ok")
+        // console.log("put: ok")
+
+        return "ok"
 
     } catch (err) {
-        console.log(err)
+        // console.log(err)
+        return "PutWithIdentifier -- " +err.message
     }
 }
