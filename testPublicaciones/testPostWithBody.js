@@ -65,7 +65,8 @@ async function testPostWithBody(serverUrl) {
                 console.log("post: la publicacion recibida no tiene estado")
             }
         } catch (err) {
-            console.log(err.error)
+            // console.log(err.error)
+            return "PostWithBody -- " +err.message
             // if (err.statusCode == 400) {
             //     console.log("post: error - peticion mal formada")
             // } else if (err.statusCode == 500) {
@@ -73,11 +74,12 @@ async function testPostWithBody(serverUrl) {
             // } else {
             //     console.log("post: error inesperado")
             // }
-            testResult = false
+            // testResult = false
         }
     }
     if (testResult) {
-        console.log("post: ok")
+        // console.log("post: ok")
+        return "ok"
     }
 }
 

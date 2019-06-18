@@ -27,14 +27,17 @@ async function testPostPhoto(serverUrl) {
          const result = await request(options)
 
          if (!result) {
-             console.log("post: mensaje vacío (sin publicacion)")
+            //  console.log("post: mensaje vacío (sin publicacion)")
+             return "PostPhoto -- " + "post: mensaje vacío (sin publicacion)"
          }
      } catch (err) {
-         console.log(err.error)
+         //console.log(err.error)
          testResult = false
+         return "PostPhoto -- " +err.message
      }
      if (testResult) {
-         console.log("post: ok")
+        //  console.log("post: ok")
+        return "ok"
      }
 }
 

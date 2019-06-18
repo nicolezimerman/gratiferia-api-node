@@ -27,13 +27,16 @@ async function runTest(serverUrl, targetId, expectedErrorCode){
         } else if (!publicacion.hasOwnProperty('state')) {
             console.log("get by id: la publicacion recibida no tiene estado")
         } else {
-            console.log("get by id: ok")
+            // console.log("get by id: ok")
+            return "ok"
         }
     } catch (err) {
         if (err.statusCode == expectedErrorCode) {
-            console.log("get by id: ok (con error esperado)")
+            // console.log("get by id: ok (con error esperado)")
+            return "GetWithIdentifier -- " + "ok (not found)"
         } else {
-            console.log("get by id: error inesperado")
+            // console.log("get by id: error inesperado")
+            return "GetWithIdentifier -- " +err.message
         }
     }
 }

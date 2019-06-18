@@ -10,12 +10,15 @@ async function runTest(serverUrl, targetId, expectedErrorCode) {
 
     try {
         await request(options)
-        console.log('delete: ok')
+        // console.log('delete: ok')
+        return "ok"
     } catch (err) {
         if (err.statusCode == expectedErrorCode) {
-            console.log("delete: ok (con error esperado)")
+            // console.log("delete: ok (con error esperado)")
+            return "DeleteWithIdentifier -- " + "ok (not found)"
         } else {
-            console.log("delete: error inesperado")
+            // console.log("delete: error inesperado")
+            return "DeleteWithIdentifier -- " +err.message
         }
     }
 }

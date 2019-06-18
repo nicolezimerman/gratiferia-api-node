@@ -38,7 +38,8 @@ module.exports = async function testGetById(serverUrl) {
 
     } catch (err) {
         if (err.status == 404)
-            console.log("get by id: ok (not found)")
+            //console.log("get by id: ok (not found)")
+            return "GetById -- " + "ok (not found)"
         else
             // console.log(err)
             return "GetById -- " +err.message

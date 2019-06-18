@@ -15,27 +15,15 @@ module.exports = async function testGetPublicacionesPaginado(serverUrl) {
         if (!publicaciones)
             throw "get paginado: mensaje vacío (sin publicaciones)"
 
-        // if (!usuario.hasOwnProperty('email'))
-        //     throw "get paginado: el usuario recibido no tiene email"
-
-        // if (!usuario.hasOwnProperty('nombre'))
-        //     throw "get paginado: el usuario recibido no tiene nombre"
-
-        // if (!usuario.hasOwnProperty('apellido'))
-        //     throw "get paginado: el usuario recibido no tiene apellido"
-
-        // if (!usuario.hasOwnProperty('edad'))
-        //     throw "get paginado: el usuario recibido no tiene edad"
-        
-        // if (!usuario.hasOwnProperty('zona'))
-        //     throw "get paginado: el usuario recibido no tiene zona"
-
-        console.log("get paginado: ok " + "publicaciones:" + publicaciones.length)
+        // console.log("get paginado: ok " + "publicaciones:" + publicaciones.length)
+        return "ok"
 
     } catch (err) {
         if (err.status == 404)
-            console.log("get paginado: ok (not found)")
+            // console.log("get paginado: ok (not found)")
+            return "GetPaginado -- " + "ok (not found)"
         else
-            console.log(err)
+            // console.log(err)
+            return "GetPaginado -- " +err.message
     }
 }
