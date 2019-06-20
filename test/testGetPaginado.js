@@ -2,7 +2,7 @@ const request = require('request-promise-native')
 
 module.exports = async function testGetPaginado(serverUrl) {
 
-    const targetPage = '?page=1'
+    const targetPage = '?offset=0&limit=10'
 
     const options = {
         uri: serverUrl + 'usuarios' + '/' + targetPage,

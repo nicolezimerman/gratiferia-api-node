@@ -160,17 +160,21 @@ async function getByZone(zone,resultadoParcial) {
     return publicacionesBuscadas
 }
 
-async function getPaginado (resultadoParcial,cantPorPagina,page){
+async function getPaginado (resultadoParcial,offset,limit){
     if(resultadoParcial != undefined){
         publicacionesParcial = resultadoParcial
     }else{
         publicacionesParcial = publicaciones
     }
     
-    const publicacionesBuscadas = []
-    const desde = ((page - 1)*cantPorPagina)
+    if(offset == undefined){
+        offset = 0
+    }
 
-    for (let index = desde; index < (desde+cantPorPagina); index++) {
+    const publicacionesBuscadas = []
+    // const desde = ((page - 1)*cantPorPagina)
+
+    for (let index = offset; index < limit; index++) {
         if(publicacionesParcial[index] != null){
             publicacionesBuscadas.push(publicacionesParcial[index])
         }

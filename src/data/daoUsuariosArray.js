@@ -93,13 +93,17 @@ async function getById(id) {
     return usuarioBuscado
 }
 
-async function getPaginado(desde) {
+async function getPaginado(offset, limit) {
 
-    const resultadosPorPagina = 10;
+    // const resultadosPorPagina = 10;
+
+    if (offset == undefined){
+        offset = 0
+    }
 
     const paginado = [];
 
-        for (let index = desde; index < desde +resultadosPorPagina; index++) {
+        for (let index = offset; index < limit; index++) {
             if (usuarios[index] != null) {
                 paginado.push(usuarios[index]);
             }

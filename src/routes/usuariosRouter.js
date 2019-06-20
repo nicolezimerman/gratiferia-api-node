@@ -52,17 +52,18 @@ async function _handleGetAll(req, res) {
 }
 
 async function _handleGetWithQS(req, res) {
-    var page = req.query.page
-    if(page != undefined){
-        const num_page = parseInt(page);
+    var offset = req.query.offset
+    var limit = req.query.limit
+    if(limit != undefined){
+        // const num_page = parseInt(page);
 
-        const resultadosPorPagina = 10;
+        // const resultadosPorPagina = 10;
 
-        const desde = (num_page-1)*resultadosPorPagina
+        // const desde = (num_page-1)*resultadosPorPagina
 
         const usuariosDAO = daoFactory.getUsuariosDAO()
         
-        const result = await usuariosDAO.getPaginado(desde)
+        const result = await usuariosDAO.getPaginado(offset, limit)
 
         res.json(result)
     }else{
