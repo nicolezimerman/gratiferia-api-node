@@ -215,7 +215,7 @@ router.put('/:id', async (req, res) => {
             throw { status: 400, descripcion: 'el id provisto no coincide entre el recurso buscado y el nuevo' }
 
         //CHEQUEAR -> para validar que el que actualiza sea su owner. O tiene que ir dentro del updateById en el dao?
-        if (req.params.owner != nuevo.owner)
+        if (req.body.owner != nuevo.owner)
             throw { status: 400, descripcion: 'la publicacion solo puede ser actualizada por su owner'}
         
         if (nuevo.owner == nuevo.reservedby)

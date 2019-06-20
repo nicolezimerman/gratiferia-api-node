@@ -4,33 +4,40 @@ async function testPostWithBody(serverUrl) {
 
     const testPublicaciones = [
         {
-            id: 1,
+            id: 99,
             title: 'Sillon 2 plazas eco cuero',
             description: 'Sillon',
             category: 'Sillones',
             zone: 'Villa crespo',
             keyword: 'muebles',
-            state: 'available'
-        },
-        {
-            id: 2,
-            title: 'Mesa ratona',
-            description: 'Mesa ratona de madera combinada',
-            category: 'Mesas',
-            zone: 'Almagro',
-            keyword: 'muebles',
-            state: 'reserved'
-        },
-        {
-            id: 3,
-            title: 'Set de platos',
-            description: '',
-            category: 'Vajilla',
-            zone: 'Caballito',
-            //keyword: ['cocina','vajilla'],
-            keyword: 'vajilla',
-            state: 'finished'
+            state: 'available',
+            owner: 'http://localhost:8081/api/usuarios/1',
+            reservedby: 'http://localhost:8081/api/usuarios/2'
         }
+        // },
+        // {
+        //     id: 999,
+        //     title: 'Mesa ratona',
+        //     description: 'Mesa ratona de madera combinada',
+        //     category: 'Mesas',
+        //     zone: 'Almagro',
+        //     keyword: 'muebles',
+        //     state: 'reserved',
+        //     owner: 'user1',
+        //     reservedby: 'user2'
+        // },
+        // {
+        //     id: 9999,
+        //     title: 'Set de platos',
+        //     description: '',
+        //     category: 'Vajilla',
+        //     zone: 'Caballito',
+        //     //keyword: ['cocina','vajilla'],
+        //     keyword: 'vajilla',
+        //     state: 'finished',
+        //     owner: 'user1',
+        //     reservedby: 'user2'
+        // }
     ]
 
     let testResult = true

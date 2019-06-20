@@ -1,6 +1,9 @@
 const request = require('request-promise-native')
 
-async function runTest(serverUrl, targetId, expectedErrorCode){
+async function testGetWithIdentifier(serverUrl){
+
+    targetId = 1; 
+    expectedErrorCode = 404;
 
     const options = {
         uri: `${serverUrl}/publicaciones/${targetId}`,
@@ -41,9 +44,9 @@ async function runTest(serverUrl, targetId, expectedErrorCode){
     }
 }
 
-async function testGetWithIdentifier(serverUrl) {
-    runTest(serverUrl, 1)
-    runTest(serverUrl, 123, 404)
-}
+// async function testGetWithIdentifier(serverUrl) {
+//     runTest(serverUrl, 1)
+//     runTest(serverUrl, 123, 404)
+// }
 
 module.exports = testGetWithIdentifier

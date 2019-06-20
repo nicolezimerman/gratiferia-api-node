@@ -15,10 +15,10 @@ async function main(){
 
     results.push(await testPostWithBody(serverUrl))
     results.push(await testGetAll(serverUrl))
-    // results.push(await testGetWithIdentifier(serverUrl))
+    results.push(await testGetWithIdentifier(serverUrl))
     //await testGetWithQueryParams(serverUrl)
     results.push(await testPutWithIdentifier(serverUrl))
-    // results.push(await testDeleteWithIdentifier(serverUrl))
+    results.push(await testDeleteWithIdentifier(serverUrl))
     results.push(await testGetPublicacionesPaginado(serverUrl))
 
     for (let index = 0; index < results.length; index++) {
