@@ -97,7 +97,7 @@ async function getPaginado(offset, limit) {
 
     // const resultadosPorPagina = 10;
 
-    if (offset == undefined){
+    if (offset == undefined || offset < 0){
         offset = 0
     }
 
