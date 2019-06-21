@@ -89,19 +89,15 @@ router.get('/:id', async (req,res) => {
 })
 
 //POST upload
-router.post('/:id', upload.single('photo'), async (req, res) => {
+router.post('/', upload.single('photo'), async (req, res) => {
     console.log(`GETTING: ${baseURI}${req.url}`)
-    console.log(req.params.id)
-    console.log(req.file)
-    try {
-        const id = req.params.id
+    console.log(req)
+    try {   
         const archivo = req.file
         
-        //if (esPublicacionInvalida(archivo))
-        //    throw { status: 400, descripcion: 'la publicacion posee un formato json invalido o faltan datos' }
-        
         const imagenesDAO = daoFactory.getImagenesDAO()
-        const imagenCreada = await imagenesDAO.add(id,archivo)
+        const imagenCreada = await imagenesDAO.add(archivo)
+        
         res.status(201).json(imagenCreada)
     } catch (err) {
         res.status(err.status).json(err)
@@ -113,8 +109,6 @@ router.delete('/:id', async (req, res) => {
     console.log(`DELETING: ${baseURI}${req.url}`)
 
     try {
-        // if (!emailIsValid(req.params.email))
-        //     throw { status: 400, descripcion: 'el email provisto es inválido' }
 
         const imagenesDAO = daoFactory.getImagenesDAO()
         await imagenesDAO.deleteById(req.params.id)

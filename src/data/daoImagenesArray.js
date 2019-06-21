@@ -49,7 +49,8 @@ async function getPaginado (resultadoParcial,cantPorPagina,page){
     return imagenesBuscadas
 }
 //FALTA
-async function add(id,archivo) {
+async function add(archivo) {
+    const id = (imagenes.length) +1
     const imagenBuscada = await getById(id)
     if (imagenBuscada)
         throw { status: 400, descripcion: 'ya existe una imagen con ese id' }
