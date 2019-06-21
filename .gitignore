@@ -78,4 +78,4 @@ typings/
 #DynamoDB Local files 
 .dynamodb/ 
 
-/src/public/images
+./src/public
