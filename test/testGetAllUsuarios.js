@@ -28,9 +28,13 @@ module.exports = async function testGetAllUsuarios(serverUrl) {
                 throw "get all: el usuario recibido no tiene zona"
         }
 
-        console.log("get all: ok")
+        //console.log("get all: ok")
+
+        return "ok"
 
     } catch (err) {
-        console.log(err)
+        //console.log(err)
+
+        return "GetAllUsuarios -- " + err.message
     }
 }

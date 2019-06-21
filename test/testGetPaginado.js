@@ -2,7 +2,7 @@ const request = require('request-promise-native')
 
 module.exports = async function testGetPaginado(serverUrl) {
 
-    const targetPage = '?page=1'
+    const targetPage = '?offset=0&limit=10'
 
     const options = {
         uri: serverUrl + 'usuarios' + '/' + targetPage,
@@ -15,27 +15,16 @@ module.exports = async function testGetPaginado(serverUrl) {
         if (!usuarios)
             throw "get paginado: mensaje vacío (sin usuarios)"
 
-        // if (!usuario.hasOwnProperty('email'))
-        //     throw "get paginado: el usuario recibido no tiene email"
+        //console.log("get paginado: ok " + "usuarios:" + usuarios.length)
 
-        // if (!usuario.hasOwnProperty('nombre'))
-        //     throw "get paginado: el usuario recibido no tiene nombre"
-
-        // if (!usuario.hasOwnProperty('apellido'))
-        //     throw "get paginado: el usuario recibido no tiene apellido"
-
-        // if (!usuario.hasOwnProperty('edad'))
-        //     throw "get paginado: el usuario recibido no tiene edad"
-        
-        // if (!usuario.hasOwnProperty('zona'))
-        //     throw "get paginado: el usuario recibido no tiene zona"
-
-        console.log("get paginado: ok " + "usuarios:" + usuarios.length)
+        return "ok"
 
     } catch (err) {
         if (err.status == 404)
-            console.log("get paginado: ok (not found)")
+            //console.log("get paginado: ok (not found)")
+            return "GetPaginado -- " + "ok (not found)"
         else
-            console.log(err)
+            // console.log(err)
+            return "GetPaginado -- " +err.message
     }
 }

@@ -33,12 +33,15 @@ module.exports = async function testGetById(serverUrl) {
         if (!usuario.hasOwnProperty('zona'))
             throw "get by id: el usuario recibido no tiene zona"
 
-        console.log("get by id: ok")
+        //console.log("get by id: ok")
+        return "ok"
 
     } catch (err) {
         if (err.status == 404)
-            console.log("get by id: ok (not found)")
+            //console.log("get by id: ok (not found)")
+            return "GetById -- " + "ok (not found)"
         else
-            console.log(err)
+            // console.log(err)
+            return "GetById -- " +err.message
     }
 }

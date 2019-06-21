@@ -38,7 +38,9 @@ async function _handleGetWithQS(req, res) {
     var category = req.query.category
     var keyword = req.query.keyword
     var zone = req.query.zone
-    var page = req.query.page
+    var offset = req.query.offset
+    var limit = req.query.limit
+    // var page = req.query.page
     const cantPorPagina = 5
     var resultadoParcial = undefined
     //console.log(resultadoParcial == undefined)
@@ -84,11 +86,11 @@ async function _handleGetWithQS(req, res) {
             res.status(err.status).json(err)
         }
     }
-    if(page != undefined){
+    if(limit != undefined){
         console.log("paginado")
         try{
             const publicacionesDAO = daoFactory.getPublicacionesDAO()
-            resultadoParcial = await publicacionesDAO.getPaginado(resultadoParcial,cantPorPagina,parseInt(page))
+            resultadoParcial = await publicacionesDAO.getPaginado(resultadoParcial, offset, limit)
 
             if(!resultadoParcial)
                 throw { status: 404, descripcion: 'publicaciones no encontradas para esa página' }
@@ -109,11 +111,13 @@ async function _handleGetWithQS(req, res) {
 async function _handleGetWithQSNew(req, res) {
     console.log("busqueda con filtros parametrizada")
     var parametros = req.query
-    var page = parametros.page
-    const cantPorPagina = 2
-    delete parametros.page
+    // var page = parametros.page
+    const offset = parametros.offset
+    const limit = parametros.limit
+    // const cantPorPagina = 2
+    // delete parametros.page
     console.log(parametros)
-    console.log('page: ' + page)
+    // console.log('page: ' + page)
     var resultado = undefined
 
     try {
@@ -127,10 +131,11 @@ async function _handleGetWithQSNew(req, res) {
     } catch (err) {
         res.status(err.status).json(err)
     } 
-    if(page != undefined && resultado != undefined){
+    if(limit != undefined){
         try {
             const publicacionesDAO = daoFactory.getPublicacionesDAO()
-            resultado = await publicacionesDAO.getPaginado(resultado,cantPorPagina,page)
+            const resultadoParcial = undefined;
+            resultado = await publicacionesDAO.getPaginado(resultadoParcial,offset, limit)
             
             if(!resultado || (resultado.length === 0))
                 throw { status: 404, descripcion: 'publicaciones no encontradas para esa pagina' }
@@ -215,7 +220,7 @@ router.put('/:id', async (req, res) => {
             throw { status: 400, descripcion: 'el id provisto no coincide entre el recurso buscado y el nuevo' }
 
         //CHEQUEAR -> para validar que el que actualiza sea su owner. O tiene que ir dentro del updateById en el dao?
-        if (req.params.owner != nuevo.owner)
+        if (req.body.owner != nuevo.owner)
             throw { status: 400, descripcion: 'la publicacion solo puede ser actualizada por su owner'}
         
         if (nuevo.owner == nuevo.reservedby)

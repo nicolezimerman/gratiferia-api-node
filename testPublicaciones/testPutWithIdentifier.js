@@ -12,7 +12,9 @@ module.exports = async function testPutWithIdentifier(serverUrl) {
         category: 'Muebles',
         zone: 'Villa crespo',
         keyword: 'Sillon',
-        state: 'available'
+        state: 'available',
+        owner: 'http://localhost:8081/api/usuarios/1',
+        reservedby: 'http://localhost:8081/api/usuarios/2'
     }
 
     const options = {
@@ -49,9 +51,11 @@ module.exports = async function testPutWithIdentifier(serverUrl) {
         if (!publicacion.hasOwnProperty('state'))
             throw "put:  la publicacion recibida no tiene estado"
         
-        console.log("put: ok")
+        // console.log("put: ok")
+        return "ok"
 
     } catch (err) {
-        console.log(err)
+        // console.log(err)
+        return "PutWithIdentifier -- " +err.message
     }
 }

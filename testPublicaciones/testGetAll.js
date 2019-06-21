@@ -33,10 +33,14 @@ async function testGetAll(serverUrl) {
             }
         }
         if (testOK) {
-            console.log("get all: ok")
+            // console.log("get all: ok")
+            return "ok"
+        }else{
+            return "GetAll -- " +"ok (error esperado)"
         }
     } catch (err) {
-        console.log("get all: error en la respuesta del servidor")
+        // console.log("get all: error en la respuesta del servidor")
+        return "GetAll -- " +err.message
     }
 }
 
