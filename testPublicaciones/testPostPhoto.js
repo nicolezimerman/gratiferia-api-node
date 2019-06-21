@@ -14,7 +14,7 @@ async function testPostPhoto(serverUrl) {
              photo: photo
      }
 
-     let testResult = true
+     let testOK = true
 
      const options = {
          method: 'POST',
@@ -35,7 +35,8 @@ async function testPostPhoto(serverUrl) {
          testResult = false
          return "PostPhoto -- " +err.message
      }
-     if (testResult) {
+     
+     if (testOK) {
         //  console.log("post: ok")
         return "ok"
      }

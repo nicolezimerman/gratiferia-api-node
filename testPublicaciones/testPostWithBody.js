@@ -40,7 +40,9 @@ async function testPostWithBody(serverUrl) {
         // }
     ]
 
-    let testResult = true
+    let testOK = true
+
+    let msj = "";
 
     for (const publicacion of testPublicaciones) {
 
@@ -55,22 +57,38 @@ async function testPostWithBody(serverUrl) {
             const result = await request(options)
 
             if (!result) {
-                console.log("post: mensaje vacío (sin publicacion)")
+                msj = "mensaje vacío (sin publicacion)"
+                testOK = false
             } else if (!result.hasOwnProperty('id')) {
-                console.log("post: la publicacion recibido no tiene id")
+                msj = "la publicacion recibido no tiene id"
+                testOK = false
             } else if (!result.hasOwnProperty('title')) {
-                console.log("post: la publicacion recibida no tiene titulo")
+                msj = "la publicacion recibida no tiene titulo"
+                testOK = false
             } else if (!result.hasOwnProperty('description')) {
-                console.log("post: la publicacion recibida no tiene descripcion")
+                msj = "la publicacion recibida no tiene descripcion"
+                testOK = false
             } else if (!result.hasOwnProperty('category')) {
-                console.log("post: la publicacion recibida no tiene categoria")
-            } else if (!result.hasOwnProperty('zona')) {
-                console.log("post: la publicacion recibida no tiene zona")
+                msj = "la publicacion recibida no tiene categoria"
+                testOK = false
+            } else if (!result.hasOwnProperty('zone')) {
+                msj = "la publicacion recibida no tiene zona"
+                testOK = false
             } else if (!result.hasOwnProperty('keyword')) {
-                console.log("post: la publicacion recibida no tiene palabra clave")
+                msj = "la publicacion recibida no tiene palabra clave"
+                testOK = false
             } else if (!result.hasOwnProperty('state')) {
-                console.log("post: la publicacion recibida no tiene estado")
+                msj = "la publicacion recibida no tiene estado"
+                testOK = false
             }
+
+            if (testOK) {
+                // console.log("post: ok")
+                return "ok"
+            }else{
+                return "PostWithBody -- " + msj
+            }
+
         } catch (err) {
             // console.log(err.error)
             return "PostWithBody -- " +err.message
@@ -84,10 +102,7 @@ async function testPostWithBody(serverUrl) {
             // testResult = false
         }
     }
-    if (testResult) {
-        // console.log("post: ok")
-        return "ok"
-    }
+
 }
 
 module.exports = testPostWithBody

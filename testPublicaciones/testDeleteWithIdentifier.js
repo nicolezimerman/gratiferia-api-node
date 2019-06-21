@@ -19,7 +19,7 @@ async function testDeleteWithIdentifier(serverUrl) {
     } catch (err) {
         if (err.statusCode == expectedErrorCode) {
             // console.log("delete: ok (con error esperado)")
-            return "DeleteWithIdentifier -- " + "ok (not found)"
+            return "DeleteWithIdentifier -- " + "publicacion no encontrada"
         } else {
             // console.log("delete: error inesperado")
             return "DeleteWithIdentifier -- " +err.message
