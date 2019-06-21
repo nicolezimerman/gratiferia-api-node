@@ -11,24 +11,28 @@ async function testGetAll(serverUrl) {
         const publicaciones = await request(options)
 
         let testOK = true
+
+        let msj ="";
+
         for (let i = 0; i < publicaciones.length && testOK; i++) {
             if (!publicaciones[i].hasOwnProperty('title')) {
-                console.log("get all: la publicaciones recibida no tiene titulo")
+                // console.log("get all: la publicaciones recibida no tiene titulo")
+                msj = "la publicacion recibida no tiene titulo"
                 testOK = false
             } else if (!publicaciones[i].hasOwnProperty('description')) {
-                console.log("get all: la publicaciones recibida no tiene descripcion")
+                msj = "la publicacion recibida no tiene descripcion"
                 testOK = false
             } else if (!publicaciones[i].hasOwnProperty('category')) {
-                console.log("get all: la publicaciones recibida no tiene categoria")
+                msj = "la publicacion recibida no tiene categoria"
                 testOK = false
             } else if (!publicaciones[i].hasOwnProperty('zone')) {
-                console.log("get all:  la publicaciones recibida no tiene zona de retiro")
+                msj = "la publicacion recibida no tiene zona de retiro"
                 testOK = false
             } else if (!publicaciones[i].hasOwnProperty('keyword')) {
-                console.log("get all:  la publicaciones recibida no tiene palabra/s clave ")
+                msj = "la publicacion recibida no tiene palabra/s clave "
                 testOK = false
             } else if (!publicaciones[i].hasOwnProperty('state')) {
-                console.log("get all:  la publicaciones recibida no tiene estado")
+                msj = "la publicacion recibida no tiene estado"
                 testOK = false
             }
         }
@@ -36,7 +40,7 @@ async function testGetAll(serverUrl) {
             // console.log("get all: ok")
             return "ok"
         }else{
-            return "GetAll -- " +"ok (error esperado)"
+            return "GetAll -- " + msj
         }
     } catch (err) {
         // console.log("get all: error en la respuesta del servidor")

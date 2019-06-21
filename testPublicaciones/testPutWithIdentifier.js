@@ -24,36 +24,52 @@ module.exports = async function testPutWithIdentifier(serverUrl) {
         json: true
     };
 
+    let testOK = true
+
+    let msj = ""
+
     try {
         const publicacion = await request(options)
 
-        if (!publicacion)
-            throw "put: mensaje vacío (sin publicacionn)"
-
-        if (publicacion.id != targetId)
-            throw "put: la publicacion recibida no es la reemplazada"
-
-        if (!publicacion.hasOwnProperty('title'))
-            throw "put: la publicacion recibida no tiene titulo"
-
-        if (!publicacion.hasOwnProperty('description'))
-            throw "put: la publicacion recibida no tiene descripcion"
-
-        if (!publicacion.hasOwnProperty('category'))
-            throw "put: la publicacion recibida no tiene categoria"
-
-        if (!publicacion.hasOwnProperty('zone'))
-            throw "put: la publicacion recibida no tiene zona de retiro"
-
-        if (!publicacion.hasOwnProperty('keyword'))
-            throw "put: la publicacion recibida no tiene palabra/s clave"
-        
-        if (!publicacion.hasOwnProperty('state'))
-            throw "put:  la publicacion recibida no tiene estado"
-        
+        if (!publicacion){
+            msj = "mensaje vacío (sin publicacion)"
+            testOK = false
+        }
+        else if (publicacion.id != targetId){
+            msj = "la publicacion recibida no es la reemplazada"
+            testOK = false
+        }
+        else if (!publicacion.hasOwnProperty('title')){
+            msj = "la publicacion recibida no tiene titulo"
+            testOK = false
+        }
+        else if (!publicacion.hasOwnProperty('description')){
+            msj = "la publicacion recibida no tiene descripcion"
+            testOK = false
+        }
+        else if (!publicacion.hasOwnProperty('category')){
+            msj = "la publicacion recibida no tiene categoria"
+            testOK = false
+        }
+        else if (!publicacion.hasOwnProperty('zone')){
+            msj = "la publicacion recibida no tiene zona de retiro"
+            testOK = false
+        }
+        else if (!publicacion.hasOwnProperty('keyword')){
+            msj = "la publicacion recibida no tiene palabra/s clave"
+            testOK = false
+        }
+        else if (!publicacion.hasOwnProperty('state')){
+            msj = "la publicacion recibida no tiene estado"
+            testOK = false
+        }
         // console.log("put: ok")
-        return "ok"
-
+        if(testOK){
+            return "ok"
+        }else{
+            return "PutWithIdentifier -- " + msj
+        }
+        
     } catch (err) {
         // console.log(err)
         return "PutWithIdentifier -- " +err.message
