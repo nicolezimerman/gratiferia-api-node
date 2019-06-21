@@ -1,17 +1,17 @@
 const dotenv = require('dotenv')
 dotenv.config()
-/*
+
 const dbConfigs = {
     home: {
         client: 'mssql',
         connection: {
             server: '127.0.0.1',
             host: '127.0.0.1',
-            user: 'ORT_TP2_USER',
-            password: 'ORT_TP2_PASS',
-            database: 'testDB'
+            user: 'apiort',
+            password: 'apiort2019',
+            database: 'APITP2'
         }
-    },
+    }/*,
     ort: {
         client: 'mssql',
         connection: {
@@ -21,18 +21,18 @@ const dbConfigs = {
             password: 'BD21A01',
             database: 'BD21A01'
         }
-    }
+    }*/
 }
-*/
+
 
 const srvConfigs = {
-    port: process.env.PORT || 8080,
+    port: process.env.PORT || 8081,
     env: process.env.DB_ENV,
     mode: process.env.MODE
 }
 
 module.exports = {
-    //bConfig: dbConfigs[srvConfigs.env],
+    dbConfig: dbConfigs[srvConfigs.env],
     port: srvConfigs.port,
     mode: srvConfigs.mode
 }
