@@ -63,6 +63,8 @@ async function add(publicacionNueva) {
     if (publicacionBuscada)
         throw { status: 400, descripcion: 'ya existe una publicacion con ese id' }
 
+    const id = (publicaciones.length) +1
+    publicacionNueva.id = id
     publicaciones.push(publicacionNueva)
     return publicacionNueva
 }
@@ -106,7 +108,7 @@ async function searchWithParameters(parametros){
     return publicacionesBuscadas
 }
 
-
+/* NO SE USAN MAS
 async function getByCategory(category,resultadoParcial) {
     if(resultadoParcial != undefined){
         publicacionesParcial = resultadoParcial
@@ -159,7 +161,7 @@ async function getByZone(zone,resultadoParcial) {
     }
     return publicacionesBuscadas
 }
-
+*/
 async function getPaginado (resultadoParcial,offset,limit){
     if(resultadoParcial != undefined){
         publicacionesParcial = resultadoParcial
@@ -190,9 +192,6 @@ module.exports = {
     add,
     deleteById,
     updateById,
-    getByCategory,
-    getByKeyword,
-    getByZone,
     getPaginado,
     searchWithParameters
 }

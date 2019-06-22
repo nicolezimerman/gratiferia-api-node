@@ -243,11 +243,12 @@ function esPublicacionInvalida(publicacion) {
         zone: Joi.string().min(1).required(),
         keyword: Joi.string().min(1), //ver como validar array
         state: Joi.string().min(1).valid('available','reserved','finished').required(),
-        owner: Joi.string().required(),
-        reservedby: Joi.string().required(),
-        image: Joi.string()
+        owner: Joi.number().min(1).required(),
+        reservedby: Joi.number().min(1).allow(null),
+        image: Joi.number().min(1).allow(null)
     }
     const { error } = Joi.validate(publicacion, schema);
+    console.log('error: ' + error)
     return error
 }
 
