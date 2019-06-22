@@ -1,4 +1,5 @@
-const imagenes = [{
+const imagenes = [
+{
     id:1,
     path: "src/public/images/original/IMG_20170214_140049.jpg",
     self: "http://localhost:8081/api/imagenes/1"
@@ -48,7 +49,7 @@ async function getPaginado (resultadoParcial,cantPorPagina,page){
     }
     return imagenesBuscadas
 }
-//FALTA
+//OK
 async function add(archivo) {
     const id = (imagenes.length) +1
     const imagenBuscada = await getById(id)
@@ -63,7 +64,7 @@ async function add(archivo) {
     imagenes.push(imagenNueva)
     return imagenNueva
 }
-//FALTA
+//OK
 async function deleteById(id) {
     const posBuscada = imagenes.findIndex(e => e.id == id)
     if (posBuscada == -1)
@@ -72,13 +73,14 @@ async function deleteById(id) {
     imagenes.splice(posBuscada, 1)
 }
 
-async function updateById(id, nuevoUsuario) {
-    const posBuscada = usuarios.findIndex(e => e.id == id)
+//OK
+async function updateById(id, imagenNueva) {
+    const posBuscada = imagenes.findIndex(e => e.id == id)
     if (posBuscada == -1)
-        throw { status: 404, description: 'usuario no encontrado' }
+        throw { status: 404, description: 'imagen no encontrada' }
 
-    usuarios.splice(posBuscada, 1, nuevoUsuario)
-    return nuevoUsuario
+    imagenes.splice(posBuscada, 1, imagenNueva)
+    return imagenNueva
 }
 
 module.exports = {

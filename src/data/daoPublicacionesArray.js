@@ -19,8 +19,8 @@ const publicaciones = [
         zone: 'Almagro',
         keyword: 'Muebles',
         state: 'finished',
-        owner: 'http://localhost:8081/api/usuarios/1',
-        reservedby: 'http://localhost:8081/api/usuarios/2',
+        owner: '1',
+        reservedby: '2',
         image:''
     },
     {

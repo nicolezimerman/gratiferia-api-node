@@ -6,9 +6,6 @@ const daoFactory = require('../data/daoFactory')
 var multer = require('multer')
 var path = require('path')
 
-// const usuariosDAO = require('../data/usuariosDAO_Arr')
-// const usuariosDAO = require('../data/usuariosDAO_DB')
-
 const router = express.Router()
 
 const baseURI = '/api/imagenes'
@@ -118,30 +115,26 @@ router.delete('/:id', async (req, res) => {
     }
 })
 //FALTA
-/*
 router.put('/:id', async (req, res) => {
     console.log(`REPLACING: ${baseURI}${req.url}`)
 
     try {
-        // if (!emailIsValid(req.params.email))
-        //     throw { status: 400, descripcion: 'el email provisto es inválido' }
+        if (req.file == undefined)
+             throw { status: 400, descripcion: 'la imagen esta vacia o tiene un formato incorrecto' }
 
-        const nuevo = req.body
-
-        if (esUsuarioInvalido(nuevo))
-            throw { status: 400, descripcion: 'el usuario posee un formato json invalido o faltan datos' }
+        const nuevo = req.file
 
         if (req.params.id != nuevo.id)
             throw { status: 400, descripcion: 'el id provisto no coincide entre el recurso buscado y el nuevo' }
 
-        const usuariosDAO = daoFactory.getUsuariosDAO()
-        const userActualizado = await usuariosDAO.updateById(req.params.id, nuevo)
-        res.json(userActualizado)
+        const imagenesDAO = daoFactory.getImagenesDAO()
+        const imagenActualizada = await imagenesDAO.updateById(req.params.id, nuevo)
+        res.json(imagenActualizada)
     } catch (err) {
         res.status(err.status).json(err)
     }
 })
-*/
+
 //como validar?
 /*
 function esImagenInvalida(imagen) {

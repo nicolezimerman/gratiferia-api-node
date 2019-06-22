@@ -236,7 +236,7 @@ router.put('/:id', async (req, res) => {
 
 function esPublicacionInvalida(publicacion) {
     const schema = {
-        id: Joi.number().integer().min(0).required(),
+        id: Joi.number().integer().min(0),
         title: Joi.string().min(1).required(),
         description: Joi.string().min(1).required(),
         category: Joi.string().min(1).required(),
