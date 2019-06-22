@@ -71,7 +71,7 @@ async function _handleGetWithQS(req, res) {
     }
 }
 
-router.get('/:id', async (req, res) => {
+/* router.get('/:id', async (req, res) => {
     console.log(`GETTING: ${baseURI}${req.url}`)
 
     try {
@@ -80,6 +80,25 @@ router.get('/:id', async (req, res) => {
 
         const usuariosDAO = daoFactory.getUsuariosDAO()
         const resultado = await usuariosDAO.getById(req.params.id)
+
+        if (!resultado)
+            throw { status: 404, descripcion: 'usuario no encontrado' }
+
+        res.json(resultado)
+    } catch (err) {
+        res.status(err.status).json(err)
+    }
+}) */
+
+router.get('/:email', async (req, res) => {
+    console.log(`GETTING: ${baseURI}${req.url}`)
+
+    try {
+        if (!emailIsValid(req.params.email))
+            throw { status: 400, descripcion: 'el email provisto es inválido' }
+
+        const usuariosDAO = daoFactory.getUsuariosDAO()
+        const resultado = await usuariosDAO.getByEmail(req.params.email)
 
         if (!resultado)
             throw { status: 404, descripcion: 'usuario no encontrado' }

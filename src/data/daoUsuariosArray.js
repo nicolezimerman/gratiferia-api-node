@@ -93,6 +93,11 @@ async function getById(id) {
     return usuarioBuscado
 }
 
+async function getByEmail(email) {
+    const usuarioBuscado = usuarios.find(e => e.email == email)
+    return usuarioBuscado
+}
+
 async function getPaginado(offset, limit) {
 
     // const resultadosPorPagina = 10;
@@ -141,6 +146,7 @@ async function updateById(id, nuevoUsuario) {
 module.exports = {
     getAll,
     getById,
+    getByEmail,
     add,
     deleteById,
     updateById,
