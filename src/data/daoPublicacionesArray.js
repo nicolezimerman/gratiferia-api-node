@@ -167,7 +167,7 @@ async function getPaginado (resultadoParcial,offset,limit){
         publicacionesParcial = publicaciones
     }
     
-    if(offset == undefined){
+    if(offset == undefined || offset < 0){
         offset = 0
     }
 
