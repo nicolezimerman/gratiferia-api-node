@@ -61,7 +61,7 @@ async function deleteById(id) {
     }
 }
 
-//proceso - falta probar
+//OK
 async function updateById(id, publicacionNueva) {
     const publicacionBuscada = await getById(id)    
     
@@ -98,7 +98,7 @@ async function searchWithParameters(parametros){
     }    
 }
 
-//proceso
+//falta-pensar como sumarlo a las queries. 
 async function getPaginado (resultadoParcial,offset,limit){
     if(resultadoParcial != undefined){
         publicacionesParcial = resultadoParcial
