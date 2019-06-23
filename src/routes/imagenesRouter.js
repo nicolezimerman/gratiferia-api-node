@@ -89,7 +89,7 @@ router.get('/:id', async (req,res) => {
 //POST upload
 router.post('/', upload.single('photo'), async (req, res) => {
     console.log(`GETTING: ${baseURI}${req.url}`)
-    console.log(req)
+    //console.log(req)
     try {   
         const archivo = req.file
         

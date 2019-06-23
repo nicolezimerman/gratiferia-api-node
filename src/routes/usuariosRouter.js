@@ -165,7 +165,7 @@ router.put('/:id', async (req, res) => {
 
 function esUsuarioInvalido(usuario) {
     const schema = {
-        id: Joi.number().integer().min(1).required(),
+        id: Joi.number().integer().min(1),
         nombre: Joi.string().alphanum().min(1).required(),
         apellido: Joi.string().alphanum().min(1).required(),
         zona: Joi.string().alphanum().min(1).required(),

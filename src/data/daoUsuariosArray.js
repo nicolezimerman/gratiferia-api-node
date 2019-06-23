@@ -1,10 +1,10 @@
 const usuarios = [{
     id:1,
-    nombre: "nombreTest1",
-    apellido: "apellidoTest1",
-    edad: 18,
-    email: "test1@test.com",
-    zona: "zona1"
+    nombre: "nicole",
+    apellido: "zimerman",
+    edad: 24,
+    email: "nzimer@gmail.com",
+    zona: "almagro"
 },{
     id:2,
     nombre: "nombreTest2",
@@ -118,9 +118,9 @@ async function getPaginado(offset, limit) {
 }
 
 async function add(usuarioNuevo) {
-    const usuarioBuscado = await getById(usuarioNuevo.id)
+    const usuarioBuscado = await getByEmail(usuarioNuevo.email)
     if (usuarioBuscado)
-        throw { status: 400, descripcion: 'ya existe un usuario con ese id' }
+        throw { status: 400, descripcion: 'ya existe un usuario con ese email' }
 
     usuarios.push(usuarioNuevo)
     return usuarioNuevo
