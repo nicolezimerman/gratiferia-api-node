@@ -1,21 +1,3 @@
-const imagenes = [
-{
-    id:1,
-    path: "src/public/images/uploads/1.jpg"
-},
-{
-    id:2,
-    path: "src/public/images/uploads/2.jpg"
-},
-{
-    id:3,
-    path: "src/public/images/uploads/3.jpg"
-},
-{
-    id:4,
-    path: "src/public/images/uploads/4.jpg"
-}]
-
 //OK
 async function getAll() {
     return imagenes

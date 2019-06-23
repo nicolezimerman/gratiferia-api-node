@@ -22,8 +22,7 @@ function getPublicacionesDAO(){
 }
 
 function getImagenesDAO(){
-    switch (mode) {
-        //case 'online': return imagenesDAO_DB
+    switch ('offline') {
         case 'offline': return imagenesDAO_Arr
         default: throw "invalid mode. check system config!"
     }

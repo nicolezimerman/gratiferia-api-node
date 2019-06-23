@@ -43,7 +43,8 @@ async function _handleGetAll(req, res) {
         res.status(err.status).json(err)
     }
 }
-//GET con paginado
+
+//GET con paginado -> Modificar
 async function _handleGetWithQS(req, res) {
     var page = req.query.page
     const cantPorPagina = 5
@@ -114,7 +115,7 @@ router.delete('/:id', async (req, res) => {
         res.status(err.status).json(err)
     }
 })
-//FALTA
+//FALTA PROBAR
 router.put('/:id', async (req, res) => {
     console.log(`REPLACING: ${baseURI}${req.url}`)
 
@@ -124,9 +125,6 @@ router.put('/:id', async (req, res) => {
 
         const nuevo = req.file
 
-        if (req.params.id != nuevo.id)
-            throw { status: 400, descripcion: 'el id provisto no coincide entre el recurso buscado y el nuevo' }
-
         const imagenesDAO = daoFactory.getImagenesDAO()
         const imagenActualizada = await imagenesDAO.updateById(req.params.id, nuevo)
         res.json(imagenActualizada)
@@ -135,16 +133,14 @@ router.put('/:id', async (req, res) => {
     }
 })
 
-//como validar?
 /*
 function esImagenInvalida(imagen) {
     const schema = {
-        id: Joi.number().integer().min(1).required(),
-        path: Joi.string().alphanum().min(1).required(),
-        self: Joi.string().alphanum().min(1).required(),
+        id: Joi.number().integer().min(1),
+        path: Joi.string().alphanum().min(1).required()
     }
-    const { error } = Joi.validate(usuario, schema);
+    const { error } = Joi.validate(imagen, schema);
     return error
-}
-*/
+}*/
+
 module.exports = router

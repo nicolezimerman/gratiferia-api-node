@@ -5,11 +5,11 @@ const publicaciones = [
         description: 'Sillon ecocuero de dos plazas con apoya pie',
         category: 'Muebles',
         zone: 'Villa crespo',
-        keyword: ['Sillon'],
+        keyword: 'Sillon',
         state: 'available',
-        owner: 'http://localhost:8081/api/usuarios/2',
+        owner: '2',
         reservedby: '',
-        image: ''
+        image: 'http://localhost:8081/api/imagenes/1'
     },
     {
         id: 2,
@@ -21,7 +21,7 @@ const publicaciones = [
         state: 'finished',
         owner: '1',
         reservedby: '2',
-        image:''
+        image:'http://localhost:8081/api/imagenes/2'
     },
     {
         id: 3,
@@ -29,11 +29,11 @@ const publicaciones = [
         description: 'mesa',
         category: 'Mesas',
         zone: 'Almagro',
-        keyword: ['Muebles'],
+        keyword: 'Muebles',
         state: 'finished',
-        owner: 'http://localhost:8081/api/usuarios/2',
-        reservedby: 'http://localhost:8081/api/usuarios/3',
-        image: ''
+        owner: '2',
+        reservedby: '3',
+        image: 'http://localhost:8081/api/imagenes/3'
     },
     {
         id: 4,
@@ -41,11 +41,11 @@ const publicaciones = [
         description: 'mesa',
         category: 'Mesas',
         zone: 'Almagro',
-        keyword: ['Mesa'],
+        keyword: 'Mesa',
         state: 'available',
-        owner: 'http://localhost:8081/api/usuarios/test1@test.com',
+        owner: '2',
         reservedby: '',
-        image: ''
+        image: 'http://localhost:8081/api/imagenes/4'
     }
 ]
 
