@@ -1,7 +1,7 @@
 const testGetAllUsuarios = require('./testGetAllUsuarios')
 const testDeleteById = require('./testDeleteById')
 //const testGetWithQueryParams = require('./testGetWithQueryParams')
-const testGetById = require('./testGetById')
+const testGetByEmail = require('./testGetByEmail')
 const testPostWithBody = require('./testPostWithBody')
 const testPutWithIdentifier = require('./testPutWithIdentifier')
 const testGetPaginado = require('./testGetPaginado')
@@ -16,7 +16,7 @@ async function main(){
 
     results.push(await testGetAllUsuarios(serverUrl))
     results.push(await testDeleteById(serverUrl))
-    results.push(await testGetById(serverUrl))
+    results.push(await testGetByEmail(serverUrl))
     results.push(await testPostWithBody(serverUrl))
     results.push(await testPutWithIdentifier(serverUrl))
     results.push(await testGetPaginado(serverUrl))

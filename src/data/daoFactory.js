@@ -1,5 +1,5 @@
 const usuariosDAO_Arr = require('./daoUsuariosArray')
-//const usuariosDAO_DB = require('./daoUsuariosDB')
+const usuariosDAO_DB = require('./daoUsuariosDB')
 const publicacionesDAO_Arr = require('./daoPublicacionesArray')
 const imagenesDAO_Arr = require('./daoImagenesArray')
 const publicacionesDAO_DB = require('./daoPublicacionesDB')
@@ -7,7 +7,7 @@ const { mode } = require('../config')
 
 function getUsuariosDAO(){
     switch (mode) {
-        //case 'online': return usuariosDAO_DB
+        case 'online': return usuariosDAO_DB
         case 'offline': return usuariosDAO_Arr
         default: throw "invalid mode. check system config!"
     }

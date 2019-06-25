@@ -1,11 +1,11 @@
 const request = require('request-promise-native')
 
-module.exports = async function testGetById(serverUrl) {
+module.exports = async function testGetByEmail(serverUrl) {
 
-    const targetId = 2
+    const targetEmail = 'test2@test.com'
 
     const options = {
-        uri: serverUrl + 'usuarios' + '/' + targetId,
+        uri: serverUrl + 'usuarios' + '/' + targetEmail,
         json: true
     }
 
@@ -18,20 +18,23 @@ module.exports = async function testGetById(serverUrl) {
         if (!usuario.hasOwnProperty('id'))
             throw "get by id: el usuario recibido no tiene id"
 
-        if (usuario.id != targetId)
+        if (usuario.email != targetEmail)
             throw "get by id: el usuario recibido no es el buscado"
 
-        if (!usuario.hasOwnProperty('nombre'))
+        if (!usuario.hasOwnProperty('name'))
             throw "get by id: el usuario recibido no tiene nombre"
 
-        if (!usuario.hasOwnProperty('apellido'))
+        if (!usuario.hasOwnProperty('lastname'))
             throw "get by id: el usuario recibido no tiene apellido"
 
-        if (!usuario.hasOwnProperty('edad'))
+        if (!usuario.hasOwnProperty('age'))
             throw "get by id: el usuario recibido no tiene edad"
         
-        if (!usuario.hasOwnProperty('zona'))
+        if (!usuario.hasOwnProperty('zone'))
             throw "get by id: el usuario recibido no tiene zona"
+            
+        if (!usuario.hasOwnProperty('password'))
+            throw "get by id: el usuario recibido no tiene password"
 
         //console.log("get by id: ok")
         return "ok"

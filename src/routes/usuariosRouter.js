@@ -166,11 +166,12 @@ router.put('/:id', async (req, res) => {
 function esUsuarioInvalido(usuario) {
     const schema = {
         id: Joi.number().integer().min(1),
-        nombre: Joi.string().alphanum().min(1).required(),
-        apellido: Joi.string().alphanum().min(1).required(),
-        zona: Joi.string().alphanum().min(1).required(),
+        name: Joi.string().alphanum().min(1).required(),
+        lastname: Joi.string().alphanum().min(1).required(),
+        zone: Joi.string().alphanum().min(1).required(),
         email: Joi.string().email({ minDomainSegments: 2 }),
-        edad: Joi.number().integer().min(0).max(100).required()
+        age: Joi.number().integer().min(0).max(100).required(),
+        password: Joi.string().alphanum().min(1).required()
     }
     const { error } = Joi.validate(usuario, schema);
     return error

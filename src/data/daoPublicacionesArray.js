@@ -63,8 +63,12 @@ async function add(publicacionNueva) {
     if (publicacionBuscada)
         throw { status: 400, descripcion: 'ya existe una publicacion con ese id' }
 
-    const id = (publicaciones.length) +1
-    publicacionNueva.id = id
+    const publicacion = publicaciones[publicaciones.length-1]
+
+    const id = publicacion.id
+
+    publicacionNueva.id = id+1
+
     publicaciones.push(publicacionNueva)
     return publicacionNueva
 }

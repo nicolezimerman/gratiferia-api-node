@@ -12,20 +12,23 @@ module.exports = async function testGetAllUsuarios(serverUrl) {
 
         for (const usuario of usuarios) {
 
-            if (!usuario.hasOwnProperty('nombre'))
+            if (!usuario.hasOwnProperty('name'))
                 throw "get all: el usuario recibido no tiene nombre"
 
-            if (!usuario.hasOwnProperty('apellido'))
+            if (!usuario.hasOwnProperty('lastname'))
                 throw "get all: el usuario recibido no tiene apellido"
 
-            if (!usuario.hasOwnProperty('edad'))
+            if (!usuario.hasOwnProperty('age'))
                 throw "get all: el usuario recibido no tiene edad"
 
             if (!usuario.hasOwnProperty('email'))
                 throw "get all: el usuario recibido no tiene email"
             
-                if (!usuario.hasOwnProperty('zona'))
+            if (!usuario.hasOwnProperty('zone'))
                 throw "get all: el usuario recibido no tiene zona"
+
+            if (!usuario.hasOwnProperty('password'))
+                throw "get all: el usuario recibido no tiene contraseña"
         }
 
         //console.log("get all: ok")

@@ -3,12 +3,12 @@ const request = require('request-promise-native');
 module.exports = async function testPostWithBody(serverUrl) {
 
     const nuevoUser = {
-        id:22,
-        nombre: 'facundo',
-        apellido: 'aguero',
-        edad: 22,
+        name: 'facundo',
+        lastname: 'aguero',
+        age: 22,
         email: 'facu.aguero12@hotmail.com',
-        zona: 'vdp'
+        zone: 'vdp',
+        password: '123456'
     }
 
     const options = {
@@ -27,17 +27,20 @@ module.exports = async function testPostWithBody(serverUrl) {
         if (!usuario.hasOwnProperty('email'))
             throw "post: el usuario recibido no tiene email"
 
-        if (!usuario.hasOwnProperty('nombre'))
+        if (!usuario.hasOwnProperty('name'))
             throw "post: el usuario recibido no tiene nombre"
 
-        if (!usuario.hasOwnProperty('apellido'))
+        if (!usuario.hasOwnProperty('lastname'))
             throw "post: el usuario recibido no tiene apellido"
 
-        if (!usuario.hasOwnProperty('edad'))
+        if (!usuario.hasOwnProperty('age'))
             throw "post: el usuario recibido no tiene edad"
 
-        if (!usuario.hasOwnProperty('zona'))
+        if (!usuario.hasOwnProperty('zone'))
             throw "post: el usuario recibido no tiene zona"
+
+        if (!usuario.hasOwnProperty('password'))
+            throw "post: el usuario recibido no tiene password"
 
         // console.log("post: ok")
 

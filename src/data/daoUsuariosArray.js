@@ -1,87 +1,99 @@
 const usuarios = [{
     id:1,
-    nombre: "nicole",
-    apellido: "zimerman",
-    edad: 24,
+    name: "nicole",
+    lastname: "zimerman",
+    age: 24,
     email: "nzimer@gmail.com",
-    zona: "almagro"
+    zone: "almagro",
+    password: "123456"
 },{
     id:2,
-    nombre: "nombreTest2",
-    apellido: "apellidoTest2",
-    edad: 22,
+    name: "nameTest2",
+    lastname: "lastnameTest2",
+    age: 22,
     email: "test2@test.com",
-    zona: "zona2"
+    zone: "zone2",
+    password: "123456"
 },{
     id:3,
-    nombre: "nombreTest3",
-    apellido: "apellidoTest3",
-    edad: 42,
+    name: "nameTest3",
+    lastname: "lastnameTest3",
+    age: 42,
     email: "test3@test.com",
-    zona: "zona3"
+    zone: "zone3",
+    password: "123456"
 },{
     id:4,
-    nombre: "nombreTest4",
-    apellido: "apellidoTest4",
-    edad: 23,
+    name: "nameTest4",
+    lastname: "lastnameTest4",
+    age: 23,
     email: "test4@test.com",
-    zona: "zona4"
+    zone: "zone4",
+    password: "123456"
 },{
     id:5,
-    nombre: "nombreTest5",
-    apellido: "apellidoTest5",
-    edad: 25,
+    name: "nameTest5",
+    lastname: "lastnameTest5",
+    age: 25,
     email: "test5@test.com",
-    zona: "zona5"
+    zone: "zone5",
+    password: "123456"
 },{
     id:6,
-    nombre: "nombreTest6",
-    apellido: "apellidoTest6",
-    edad: 43,
+    name: "nameTest6",
+    lastname: "lastnameTest6",
+    age: 43,
     email: "test6@test.com",
-    zona: "zona6"
+    zone: "zone6",
+    password: "123456"
 },{
     id:7,
-    nombre: "nombreTest7",
-    apellido: "apellidoTest7",
-    edad: 71,
+    name: "nameTest7",
+    lastname: "lastnameTest7",
+    age: 71,
     email: "test7@test.com",
-    zona: "zona7"
+    zone: "zone7",
+    password: "123456"
 },{
     id:8,
-    nombre: "nombreTest8",
-    apellido: "apellidoTest8",
-    edad: 25,
+    name: "nameTest8",
+    lastname: "lastnameTest8",
+    age: 25,
     email: "test8@test.com",
-    zona: "zona8"
+    zone: "zone8",
+    password: "123456"
 },{
     id:9,
-    nombre: "nombreTest9",
-    apellido: "apellidoTest9",
-    edad: 36,
+    name: "nameTest9",
+    lastname: "lastnameTest9",
+    age: 36,
     email: "test9@test.com",
-    zona: "zona9"
+    zone: "zone9",
+    password: "123456"
 },{
     id:10,
-    nombre: "nombreTest10",
-    apellido: "apellidoTest10",
-    edad: 21,
+    name: "nameTest10",
+    lastname: "lastnameTest10",
+    age: 21,
     email: "test10@test.com",
-    zona: "zona10"
+    zone: "zone10",
+    password: "123456"
 },{
     id:11,
-    nombre: "nombreTest11",
-    apellido: "apellidoTest11",
-    edad: 42,
+    name: "nameTest11",
+    lastname: "lastnameTest11",
+    age: 42,
     email: "test11@test.com",
-    zona: "zona11"
+    zone: "zone11",
+    password: "123456"
 },{
     id:12,
-    nombre: "nombreTest12",
-    apellido: "apellidoTest12",
-    edad: 22,
+    name: "nameTest12",
+    lastname: "lastnameTest12",
+    age: 22,
     email: "test12@test.com",
-    zona: "zona12"
+    zone: "zone12",
+    password: "123456"
 }]
 
 async function getAll() {
@@ -121,6 +133,12 @@ async function add(usuarioNuevo) {
     const usuarioBuscado = await getByEmail(usuarioNuevo.email)
     if (usuarioBuscado)
         throw { status: 400, descripcion: 'ya existe un usuario con ese email' }
+
+    const usuario = usuarios[usuarios.length-1]
+
+    const id = usuario.id
+
+    usuarioNuevo.id = id+1;
 
     usuarios.push(usuarioNuevo)
     return usuarioNuevo
