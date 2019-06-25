@@ -11,8 +11,8 @@ async function testPostWithBody(serverUrl) {
             zone: 'Villa crespo',
             keyword: 'muebles',
             state: 'available',
-            owner: 'http://localhost:8081/api/usuarios/1',
-            reservedby: 'http://localhost:8081/api/usuarios/2'
+            owner: '1',
+            reservedby: '2'
         }
         // },
         // {

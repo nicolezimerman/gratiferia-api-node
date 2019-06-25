@@ -1,27 +1,30 @@
 const request = require('request-promise-native')
 
-async function runTest(serverUrl, zonaRetiro, expectedErrorCode){
+async function testGetWithQueryParams(serverUrl){
 
     const options = {
         uri: `${serverUrl}/publicaciones`,
-        qs: { zone: zonaRetiro},
+        qs: { zone: 'Almagro', 
+        category: 'Muebles',
+        keyword: 'Muebles'},
         json: true
     }
 
     try {
-        const publicacion = await request(options)
+        const publicaciones = await request(options)
 
         let testOK = true
 
         let msj =""
 
-        if (!publicacion) {
-            msj = "mensaje vacío (sin publicacion)"
+        if (!publicaciones) {
+            msj = "mensaje vacío (sin publicaciones)"
             testOK = false
-        } else if (publicacion.id != targetId) {
-            msj = "la publicacion recibida no es la buscada"
-            testOK = false
-        } else if (!publicacion.hasOwnProperty('title')) {
+        } 
+
+        for (const publicacion of publicaciones) {
+
+        if (!publicacion.hasOwnProperty('title')) {
             msj = "la publicacion recibida no tiene titulo"
             testOK = false
         } else if (!publicacion.hasOwnProperty('description')) {
@@ -41,25 +44,21 @@ async function runTest(serverUrl, zonaRetiro, expectedErrorCode){
             testOK = false
         }
 
-        if(testOK){
-            return "ok"
-        }else{
-            return "GetWithZoneParams -- " + msj
-        }
+    }
+    if(testOK){
+        return "ok"
+    }else{
+        return "GetWithQueryParams -- " + msj
+    }
     } catch (err) {
         // if (err.statusCode == expectedErrorCode) {
         //     // console.log("get by id: ok (con error esperado)")
         //     return "GetWithZoneParams -- " + "ok (not found)"
         // } else {
             // console.log("get by id: error inesperado")
-        return "GetWithZoneParams -- " +err.message
+        return "GetWithQueryParams -- " +err.message
         // }
     }
 }
 
-async function testGetWithIdentifier(serverUrl) {
-    runTest(serverUrl, 1)
-    runTest(serverUrl, 123, 404)
-}
-
-module.exports = testGetWithIdentifier
+module.exports = testGetWithQueryParams
