@@ -1,20 +1,40 @@
 const imagenes = [
 {
     id:1,
-    path: "src/public/images/uploads/1.jpg"
+    path: "src/public/images/uploads/1.jpg",
+    self: "http://localhost:8081/api/imagenes/1"
 },
 {
     id:2,
-    path: "src/public/images/uploads/2.jpg"
+    path: "src/public/images/uploads/2.jpg",
+    self: "http://localhost:8081/api/imagenes/2"
 },
 {
     id:3,
-    path: "src/public/images/uploads/3.jpg"
+    path: "src/public/images/uploads/3.jpg",
+    self: "http://localhost:8081/api/imagenes/3"
 },
 {
     id:4,
-    path: "src/public/images/uploads/4.jpg"
-}]
+    path: "src/public/images/uploads/4.jpg",
+    self: "http://localhost:8081/api/imagenes/4"
+},
+{
+    id:5,
+    path: "src/public/images/uploads/5.jpg",
+    self: "http://localhost:8081/api/imagenes/5"
+},
+{
+    id:6,
+    path: "src/public/images/uploads/6.jpg",
+    self: "http://localhost:8081/api/imagenes/6"
+},
+{
+    id:7,
+    path: "src/public/images/uploads/7.jpg",
+    self: "http://localhost:8081/api/imagenes/7"
+}
+]
 
 //OK
 async function getAll() {
