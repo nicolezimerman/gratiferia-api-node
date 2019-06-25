@@ -7,7 +7,7 @@ const publicaciones = [
         zone: 'Villa crespo',
         keyword: 'Sillon',
         state: 'available',
-        owner: '2',
+        owner: '1',
         reservedby: '',
         image: 'http://localhost:8081/api/imagenes/1'
     },
@@ -31,8 +31,8 @@ const publicaciones = [
         zone: 'Almagro',
         keyword: 'Muebles',
         state: 'finished',
-        owner: '2',
-        reservedby: '3',
+        owner: '3',
+        reservedby: '1',
         image: 'http://localhost:8081/api/imagenes/3'
     },
     {
@@ -43,7 +43,7 @@ const publicaciones = [
         zone: 'Almagro',
         keyword: 'Mesa',
         state: 'available',
-        owner: '2',
+        owner: '1',
         reservedby: '',
         image: 'http://localhost:8081/api/imagenes/4'
     }
