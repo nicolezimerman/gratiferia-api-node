@@ -33,7 +33,8 @@ async function _handleGetAll(req, res) {
     }
 }
 
-//Get by category/zone/keyword
+//Get by category/zone/keyword 
+/*
 async function _handleGetWithQS(req, res) {
     var category = req.query.category
     var keyword = req.query.keyword
@@ -41,7 +42,7 @@ async function _handleGetWithQS(req, res) {
     var offset = req.query.offset
     var limit = req.query.limit
     // var page = req.query.page
-    const cantPorPagina = 5
+    //const cantPorPagina = 5
     var resultadoParcial = undefined
     //console.log(resultadoParcial == undefined)
     if(category != undefined){
@@ -106,7 +107,7 @@ async function _handleGetWithQS(req, res) {
     }else{
         res.json(resultadoParcial)
     }
-}
+}*/
 
 async function _handleGetWithQSNew(req, res) {
     console.log("busqueda con filtros parametrizada")
@@ -251,7 +252,7 @@ function esPublicacionInvalida(publicacion) {
         state: Joi.string().min(1).valid('available','reserved','finished').required(),
         owner: Joi.number().min(1).required(),
         reservedby: Joi.number().min(1).allow(null),
-        image: Joi.number().min(1).allow(null)
+        image: Joi.string().min(1).allow(null)
     }
     const { error } = Joi.validate(publicacion, schema);
     console.log('error: ' + error)

@@ -7,8 +7,8 @@ const publicaciones = [
         zone: 'Villa crespo',
         keyword: 'Sillon',
         state: 'available',
-        owner: '2',
-        reservedby: '',
+        owner: 1,
+        reservedby: null,
         image: 'http://localhost:8081/api/imagenes/1'
     },
     {
@@ -19,20 +19,20 @@ const publicaciones = [
         zone: 'Almagro',
         keyword: 'Muebles',
         state: 'finished',
-        owner: '1',
-        reservedby: '2',
+        owner: 1,
+        reservedby: 2,
         image:'http://localhost:8081/api/imagenes/2'
     },
     {
         id: 3,
-        title: 'Mesa maderafdsfsd',
+        title: 'Mesa madera negra',
         description: 'mesa',
         category: 'Mesas',
         zone: 'Almagro',
         keyword: 'Muebles',
         state: 'finished',
-        owner: '2',
-        reservedby: '3',
+        owner: 3,
+        reservedby: 1,
         image: 'http://localhost:8081/api/imagenes/3'
     },
     {
@@ -43,10 +43,47 @@ const publicaciones = [
         zone: 'Almagro',
         keyword: 'Mesa',
         state: 'available',
-        owner: '2',
-        reservedby: '',
+        owner: 2,
+        reservedby: null,
         image: 'http://localhost:8081/api/imagenes/4'
+    },
+    {
+        id: 5,
+        title: 'Heladera',
+        description: 'Heladera con Freezer Coventry HF24BGC1 Blanca',
+        category: 'Electrodomesticos',
+        zone: 'Villa crespo',
+        keyword: 'Heladera',
+        state: 'available',
+        owner: 3,
+        reservedby: null,
+        image: 'http://localhost:8081/api/imagenes/5'
+    },
+    {
+        id: 6,
+        title: 'Caloventor blanco',
+        description: 'Caloventor Axel 1900 W AX-CA',
+        category: 'Electrodomesticos',
+        zone: 'Palermo',
+        keyword: 'Estufa',
+        state: 'available',
+        owner: 4,
+        reservedby: null,
+        image: 'http://localhost:8081/api/imagenes/6'
+    },
+    {
+        id: 7,
+        title: 'Mochila rosa',
+        description: 'Mochila Delsey Legere Rosa',
+        category: 'Bolsos',
+        zone: 'Palermo',
+        keyword: 'Bolsos',
+        state: 'available',
+        owner: 4,
+        reservedby: null,
+        image: 'http://localhost:8081/api/imagenes/7'
     }
+
 ]
 
 async function getAll() {
