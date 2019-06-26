@@ -118,6 +118,11 @@ router.post('/', async (req, res) => {
             throw { status: 400, descripcion: 'el usuario posee un formato json invalido o faltan datos' }
 
         const usuariosDAO = daoFactory.getUsuariosDAO()
+
+        const usuario = await usuariosDAO.getByEmail(nuevo.email)
+
+        if(usuario != undefined){throw { status: 400, descripcion: 'ya existe un usuario con el email provisto' } }
+
         const userCreado = await usuariosDAO.add(nuevo)
         res.status(201).json(userCreado)
     } catch (err) {

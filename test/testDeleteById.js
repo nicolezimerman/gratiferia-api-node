@@ -2,7 +2,7 @@ const request = require('request-promise-native');
 
 module.exports = async function testDeleteById(serverUrl) {
 
-    const targetId = 1
+    const targetId = 6
 
     const options = {
         method: 'DELETE',

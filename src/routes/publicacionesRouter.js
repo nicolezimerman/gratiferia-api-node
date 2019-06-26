@@ -111,9 +111,12 @@ async function _handleGetWithQS(req, res) {
 async function _handleGetWithQSNew(req, res) {
     console.log("busqueda con filtros parametrizada")
     var parametros = req.query
-    // var page = parametros.page
     const offset = parametros.offset
     const limit = parametros.limit
+
+    // var page = parametros.page
+    delete parametros.offset
+    delete parametros.limit
     // const cantPorPagina = 2
     // delete parametros.page
     console.log(parametros)
@@ -134,7 +137,13 @@ async function _handleGetWithQSNew(req, res) {
     if(limit != undefined){
         try {
             const publicacionesDAO = daoFactory.getPublicacionesDAO()
-            const resultadoParcial = undefined;
+
+            let resultadoParcial = undefined;
+
+            if (resultado != undefined && resultado.length > 0) {
+                resultadoParcial = resultado
+            }
+            
             resultado = await publicacionesDAO.getPaginado(resultadoParcial,offset, limit)
             
             if(!resultado || (resultado.length === 0))

@@ -17,7 +17,19 @@ async function getByEmail(email) {
     try {
         // const selectById = `SELECT * FROM publications WHERE id= ${id};`
         // const result = await knex.raw(selectById)
-        const result = await knex.select('*').from('users').where('email', email)
+        const result = await knex.select('*').from('users').where('email', email).first()
+
+        return result
+    } catch (err) {
+        throw { status: 500, descripcion: err.message }
+    }
+}
+
+async function getById(id) {
+    try {
+        // const selectById = `SELECT * FROM publications WHERE id= ${id};`
+        // const result = await knex.raw(selectById)
+        const result = await knex.select('*').from('users').where('id', id)
 
         return result
     } catch (err) {
@@ -95,16 +107,23 @@ async function updateById(id, usuarioNuevo) {
 //falta-pensar como sumarlo a las queries. 
 async function getPaginado (offset,limit){
     
-    if(offset == undefined || offset < 0){
-        offset = 0
+    let offsetInt;
+
+    if (offset != undefined) {
+        offsetInt= parseInt(offset)
     }
+
+    if(offsetInt< 0){
+        offsetInt = 0
+    }
+
 
     const usuarios = getAll()
 
     const usuariosBuscados = []
     // const desde = ((page - 1)*cantPorPagina)
 
-    for (let index = offset; index < limit; index++) {
+    for (let index = offsetInt; index < limit; index++) {
         if(usuarios[index] != null){
             usuariosBuscados.push(usuarios[index])
         }
@@ -120,5 +139,6 @@ module.exports = {
     deleteById, 
     updateById,
     // searchWithParameters,
-    getPaginado
+    getPaginado,
+    getById
 }

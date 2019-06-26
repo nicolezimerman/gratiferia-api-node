@@ -17,7 +17,7 @@ async function getById(id) {
     try {
         // const selectById = `SELECT * FROM publications WHERE id= ${id};`
         // const result = await knex.raw(selectById)
-        const result = await knex.select('*').from('publications').where('id', id)
+        const result = await knex.select('*').from('publications').where('id', id).first()
 
         return result
     } catch (err) {
@@ -103,17 +103,23 @@ async function getPaginado (resultadoParcial,offset,limit){
     if(resultadoParcial != undefined){
         publicacionesParcial = resultadoParcial
     }else{
-        publicacionesParcial = publicaciones
+        publicacionesParcial = getAll()
     }
-    
-    if(offset == undefined || offset < 0){
-        offset = 0
+
+    let offsetInt;
+
+    if (offset != undefined) {
+        offsetInt= parseInt(offset)
+    }
+
+    if(offsetInt< 0){
+        offsetInt = 0
     }
 
     const publicacionesBuscadas = []
     // const desde = ((page - 1)*cantPorPagina)
 
-    for (let index = offset; index < limit; index++) {
+    for (let index = offsetInt; index < limit; index++) {
         if(publicacionesParcial[index] != null){
             publicacionesBuscadas.push(publicacionesParcial[index])
         }

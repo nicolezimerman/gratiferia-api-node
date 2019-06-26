@@ -2,7 +2,7 @@ const request = require('request-promise-native');
 
 async function testDeleteWithIdentifier(serverUrl) {
 
-    targetId = 1;
+    targetId = 6;
 
     expectedErrorCode = 404;
 

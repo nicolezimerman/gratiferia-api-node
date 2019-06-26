@@ -13,7 +13,7 @@ CREATE TABLE [dbo].[users](
 	[name] [char](30) NOT NULL,
 	[lastname] [char](30) NOT NULL,
 	[age] [int] NOT NULL,
-	[email] [text] NOT NULL,
+	[email] [varchar](50) NOT NULL,
 	[password] [text] NOT NULL,
 	[zone] [varchar](50) NULL,
  CONSTRAINT [PK_users] PRIMARY KEY CLUSTERED 

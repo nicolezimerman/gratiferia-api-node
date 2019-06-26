@@ -2,7 +2,7 @@ const request = require('request-promise-native')
 
 async function testGetWithIdentifier(serverUrl){
 
-    targetId = 1; 
+    targetId = 7; 
     expectedErrorCode = 404;
 
     let testOK = true;

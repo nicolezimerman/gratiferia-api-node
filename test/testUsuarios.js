@@ -15,8 +15,8 @@ async function main(){
     let ok = 0;
 
     results.push(await testGetAllUsuarios(serverUrl))
-    results.push(await testDeleteById(serverUrl))
     results.push(await testGetByEmail(serverUrl))
+    results.push(await testDeleteById(serverUrl))
     results.push(await testPostWithBody(serverUrl))
     results.push(await testPutWithIdentifier(serverUrl))
     results.push(await testGetPaginado(serverUrl))
