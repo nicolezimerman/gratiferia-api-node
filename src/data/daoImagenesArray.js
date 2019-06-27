@@ -96,13 +96,13 @@ async function updateById(id, imagenNueva) {
     if (posBuscada == -1)
         throw { status: 404, description: 'imagen no encontrada' }
 
-    const imagenNueva = {}
-    imagenNueva.id = id,
-    imagenNueva.path = 'src/public/images/uploads/'+imagenNueva.filename,
-    imagenNueva.self = 'http://localhost:8081/api/imagenes/'+id
+    const imagen = {}
+    imagen.id = id,
+    imagen.path = 'src/public/images/uploads/'+imagenNueva.filename,
+    imagen.self = 'http://localhost:8081/api/imagenes/'+id
     
-    imagenes.splice(posBuscada, 1, imagenNueva)
-    return imagenNueva
+    imagenes.splice(posBuscada, 1, imagen)
+    return imagen
 }
 
 module.exports = {

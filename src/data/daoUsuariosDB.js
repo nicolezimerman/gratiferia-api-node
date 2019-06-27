@@ -104,7 +104,7 @@ async function updateById(id, usuarioNuevo) {
 //     }    
 // }
 
-//falta-pensar como sumarlo a las queries. 
+//OK 
 async function getPaginado (offset,limit){
     
     let offsetInt;

@@ -98,7 +98,7 @@ async function searchWithParameters(parametros){
     }    
 }
 
-//falta-pensar como sumarlo a las queries. 
+//OK 
 async function getPaginado (resultadoParcial,offset,limit){
     if(resultadoParcial != undefined){
         publicacionesParcial = resultadoParcial
