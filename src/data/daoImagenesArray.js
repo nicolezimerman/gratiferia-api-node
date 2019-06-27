@@ -87,6 +87,7 @@ async function deleteById(id) {
         throw { status: 404, description: 'imagen no encontrada' }
 
     imagenes.splice(posBuscada, 1)
+    return "imagen eliminada"
 }
 
 //OK
@@ -95,6 +96,11 @@ async function updateById(id, imagenNueva) {
     if (posBuscada == -1)
         throw { status: 404, description: 'imagen no encontrada' }
 
+    const imagenNueva = {}
+    imagenNueva.id = id,
+    imagenNueva.path = 'src/public/images/uploads/'+imagenNueva.filename,
+    imagenNueva.self = 'http://localhost:8081/api/imagenes/'+id
+    
     imagenes.splice(posBuscada, 1, imagenNueva)
     return imagenNueva
 }

@@ -44,28 +44,9 @@ async function _handleGetAll(req, res) {
     }
 }
 
-//GET con paginado -> Modificar
+//GET con query params
 async function _handleGetWithQS(req, res) {
-    var page = req.query.page
-    const cantPorPagina = 5
-    var resultadoParcial = undefined
-
-    if(page != undefined){
-        console.log("paginado")
-        try{
-            const imagenesDAO = daoFactory.getImagenesDAO()
-            resultadoParcial = await imagenesDAO.getPaginado(resultadoParcial,cantPorPagina,parseInt(page))
-
-            if(!resultadoParcial)
-                throw { status: 404, descripcion: 'imagenes no encontradas para esa página' }
-        
-            res.json(resultadoParcial)
-        } catch (err){
-            res.status(err.status).json(err)
-        }
-    }else{
         res.status(400).json("no existe ninguna funcion para el parametro indicado")
-    }
 }
 
 //GET ONE IMAGE FILE
@@ -109,38 +90,29 @@ router.delete('/:id', async (req, res) => {
     try {
 
         const imagenesDAO = daoFactory.getImagenesDAO()
-        await imagenesDAO.deleteById(req.params.id)
-        res.status(204).send()
+        const result = await imagenesDAO.deleteById(req.params.id)
+        res.status(201).json(result)
     } catch (err) {
         res.status(err.status).json(err)
     }
 })
 //FALTA PROBAR
-router.put('/:id', async (req, res) => {
+router.put('/:id', upload.single('photo'), async (req, res) => {
     console.log(`REPLACING: ${baseURI}${req.url}`)
 
     try {
         if (req.file == undefined)
              throw { status: 400, descripcion: 'la imagen esta vacia o tiene un formato incorrecto' }
 
-        const nuevo = req.file
+        const archivo = req.file
 
         const imagenesDAO = daoFactory.getImagenesDAO()
-        const imagenActualizada = await imagenesDAO.updateById(req.params.id, nuevo)
-        res.json(imagenActualizada)
+        const imagenActualizada = await imagenesDAO.updateById(req.params.id, archivo)
+
+        res.status(201).json(imagenActualizada)
     } catch (err) {
         res.status(err.status).json(err)
     }
 })
-
-/*
-function esImagenInvalida(imagen) {
-    const schema = {
-        id: Joi.number().integer().min(1),
-        path: Joi.string().alphanum().min(1).required()
-    }
-    const { error } = Joi.validate(imagen, schema);
-    return error
-}*/
 
 module.exports = router
