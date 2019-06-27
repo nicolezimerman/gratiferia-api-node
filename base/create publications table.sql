@@ -26,13 +26,6 @@ CREATE TABLE [dbo].[publications](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[publications]  WITH CHECK ADD  CONSTRAINT [FK_publications_images] FOREIGN KEY([image])
-REFERENCES [dbo].[images] ([id])
-GO
-
-ALTER TABLE [dbo].[publications] CHECK CONSTRAINT [FK_publications_images]
-GO
-
 ALTER TABLE [dbo].[publications]  WITH CHECK ADD  CONSTRAINT [FK_publications_users] FOREIGN KEY([owner])
 REFERENCES [dbo].[users] ([id])
 GO
