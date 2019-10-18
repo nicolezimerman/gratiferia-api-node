@@ -100,10 +100,11 @@ router.get('/:email', async (req, res) => {
         const usuariosDAO = daoFactory.getUsuariosDAO()
         const resultado = await usuariosDAO.getByEmail(req.params.email)
 
-        if (!resultado)
-            throw { status: 404, descripcion: 'usuario no encontrado' }
+       if (!resultado)
+         throw { status: 404, descripcion: 'usuario no encontrado' }
 
         res.json(resultado)
+
     } catch (err) {
         res.status(err.status).json(err)
     }
@@ -115,13 +116,13 @@ router.post('/', async (req, res) => {
     try {
         const nuevo = req.body
         if (esUsuarioInvalido(nuevo))
-            throw { status: 400, descripcion: 'el usuario posee un formato json invalido o faltan datos' }
+            throw { status: 400, descripcion: 'El usuario posee un formato json invalido o faltan datos' }
 
         const usuariosDAO = daoFactory.getUsuariosDAO()
 
-        const usuario = await usuariosDAO.getByEmail(nuevo.email)
+        //const usuario = await usuariosDAO.getByEmail(nuevo.email)
 
-        if(usuario != undefined){throw { status: 400, descripcion: 'ya existe un usuario con el email provisto' } }
+        //if(usuario != undefined){throw { status: 400, descripcion: 'Ya existe un usuario con el email provisto' } }
 
         const userCreado = await usuariosDAO.add(nuevo)
         res.status(201).json(userCreado)

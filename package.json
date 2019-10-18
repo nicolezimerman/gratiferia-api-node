@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node src/server.js",
     "test-usuarios": "node test/testUsuarios.js",
-    "test-publicaciones": "node testPublicaciones/testAllEndPoints.js"
+    "test-publicaciones": "node testPublicaciones/testAllEndPoints.js",
+    "dev": "nodemon src/server.js"
   },
   "author": "",
   "license": "ISC",
@@ -14,14 +15,16 @@
     "@hapi/joi": "^15.0.2",
     "dotenv": "^8.0.0",
     "express": "^4.16.4",
+    "firebase": "^7.2.0",
+    "firebase-admin": "^8.6.0",
     "knex": "^0.16.5",
     "lodash": "^4.17.11",
+    "mssql": "^5.1.0",
     "multer": "^1.4.1",
     "request": "^2.88.0",
-    "request-promise-native": "^1.0.7",
-    "mssql": "^5.1.0"
+    "request-promise-native": "^1.0.7"
   },
   "devDependencies": {
-    "nodemon": "^1.19.0"
+    "nodemon": "^1.19.4"
   }
 }
