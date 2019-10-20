@@ -128,8 +128,8 @@ async function _handleGetWithQSNew(req, res) {
         const publicacionesDAO = daoFactory.getPublicacionesDAO()
         resultado = await publicacionesDAO.searchWithParameters(parametros)
 
-        if (!resultado)
-            throw { status: 404, descripcion: 'publicaciones no encontradas para esa busqueda' }
+        if (resultado.length == 0)
+            throw { status: 404, descripcion: 'Publicaciones no encontradas para esa busqueda' }
         
         //res.json(resultado)
     } catch (err) {
@@ -163,8 +163,9 @@ router.get('/:id', async (req, res) => {
     console.log(`GETTING: ${baseURI}${req.url}`)
 
     try {
-        if (isNaN(req.params.id))
-            throw { status: 400, descripcion: 'el id provisto no es un número o es inválido' }
+        //   ------<<< SOLO COMENTADO PARA IMPLEMENTAR EN FIREBASE  >>>--------     
+        // if (isNaN(req.params.id))
+        //     throw { status: 400, descripcion: 'el id provisto no es un número o es inválido' }
 
         const publicacionesDAO = daoFactory.getPublicacionesDAO()
         const resultado = await publicacionesDAO.getById(req.params.id)
@@ -185,10 +186,10 @@ router.post('/', async (req, res) => {
     try {
         const nuevo = req.body
         if (esPublicacionInvalida(nuevo))
-            throw { status: 400, descripcion: 'la publicacion posee un formato json invalido o faltan datos' }
+            throw { status: 400, descripcion: 'La publicacion posee un formato json invalido o faltan datos' }
         
         if(nuevo.owner == nuevo.reservedby)
-            throw { status: 401, descripcion: 'el owner y el reservedby no pueden ser el mismo usuario'}
+            throw { status: 401, descripcion: 'El owner y el reservedby no pueden ser el mismo usuario'}
 
         const publicacionesDAO = daoFactory.getPublicacionesDAO()
         const pubCreada = await publicacionesDAO.add(nuevo)
@@ -203,8 +204,9 @@ router.delete('/:id', async (req, res) => {
     console.log(`DELETING: ${baseURI}${req.url}`)
 
     try {
-        if (isNaN(req.params.id))
-            throw { status: 400, descripcion: 'el id provisto no es un número o es inválido' }
+
+        // if (isNaN(req.params.id))
+        //     throw { status: 400, descripcion: 'el id provisto no es un número o es inválido' }
 
         const publicacionesDAO = daoFactory.getPublicacionesDAO()
         await publicacionesDAO.deleteById(req.params.id)
@@ -219,19 +221,19 @@ router.put('/:id', async (req, res) => {
     console.log(`REPLACING: ${baseURI}${req.url}`)
 
     try {
-        if (isNaN(req.params.id))
-            throw { status: 400, descripcion: 'el id provisto no es un número o es inválido' }
+        // if (isNaN(req.params.id))
+        //     throw { status: 400, descripcion: 'el id provisto no es un número o es inválido' }
         const nuevo = req.body
 
         if (esPublicacionInvalida(nuevo))
-            throw { status: 400, descripcion: 'la publicacion posee un formato json invalido o faltan datos' }
+            throw { status: 400, descripcion: 'La publicacion posee un formato json invalido o faltan datos' }
 
         //CHEQUEAR -> para validar que el que actualiza sea su owner. O tiene que ir dentro del updateById en el dao?
         if (req.body.owner != nuevo.owner)
-            throw { status: 400, descripcion: 'la publicacion solo puede ser actualizada por su owner'}
+            throw { status: 400, descripcion: 'La publicacion solo puede ser actualizada por su owner'}
         
         if (nuevo.owner == nuevo.reservedby)
-            throw { status: 401, descripcion: 'el owner y el reservedby no pueden ser el mismo usuario'}
+            throw { status: 401, descripcion: 'El owner y el reservedby no pueden ser el mismo usuario'}
         
         const publicacionesDAO = daoFactory.getPublicacionesDAO()
         const pubActualizada = await publicacionesDAO.updateById(req.params.id, nuevo)
@@ -243,19 +245,28 @@ router.put('/:id', async (req, res) => {
 
 function esPublicacionInvalida(publicacion) {
     const schema = {
-        id: Joi.number().integer().min(0),
+        //   ------<<< SOLO COMENTADO PARA IMPLEMENTAR EN FIREBASE  >>>--------     
+
+        // id: Joi.number().integer().min(0),
+
         title: Joi.string().min(1).required(),
         description: Joi.string().min(1).required(),
         category: Joi.string().min(1).required(),
         zone: Joi.string().min(1).required(),
         keyword: Joi.string().min(1), //ver como validar array
         state: Joi.string().min(1).valid('available','reserved','finished').required(),
-        owner: Joi.number().min(1).required(),
-        reservedby: Joi.number().min(1).allow(null),
+
+        //   ------<<< SOLO MODIFICADO PARA IMPLEMENTAR EN FIREBASE  >>>--------     
+        /*owner: Joi.number().min(1).required(),
+        reservedby: Joi.number().min(1).allow(null), */
+
+        owner: Joi.string(),
+        reservedby: Joi.string().allow(null),
+
         image: Joi.string().min(1).allow(null)
     }
     const { error } = Joi.validate(publicacion, schema);
-    console.log('error: ' + error)
+    
     return error
 }
 

@@ -1,5 +1,15 @@
 const express = require('express')
 const { port } = require('./config')
+var admin = require("firebase-admin");
+require('firebase/firebase-storage')
+
+var serviceAccount = require("../sdk-firebase.json");
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://gratiferia-app.firebaseio.com"
+});
+exports.admin = admin
+
 const usuariosRouter = require('./routes/usuariosRouter')
 const publicacionesRouter = require('./routes/publicacionesRouter')
 const imagenesRouter = require('./routes/imagenesRouter')
@@ -20,3 +30,5 @@ app.listen(port, () => {
 
     console.log(`servidor inicializado en puerto ${port}`)
 })
+
+

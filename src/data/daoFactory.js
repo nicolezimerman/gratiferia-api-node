@@ -4,7 +4,7 @@ const usuariosDAO_FB = require('./daoUsuariosFirebase')
 const publicacionesDAO_Arr = require('./daoPublicacionesArray')
 const imagenesDAO_Arr = require('./daoImagenesArray')
 const publicacionesDAO_DB = require('./daoPublicacionesDB')
-//const publicacionesDAO_FB = require('./daoPublicacionesFirebase')
+const publicacionesDAO_FB = require('./daoPublicacionesFirebase')
 const { mode } = require('../config')
 
 

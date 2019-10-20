@@ -79,6 +79,7 @@ async function _handleGetWithQS(req, res) {
         //     throw { status: 400, descripcion: 'el email provisto es inválido' }
 
         const usuariosDAO = daoFactory.getUsuariosDAO()
+
         const resultado = await usuariosDAO.getById(req.params.id)
 
         if (!resultado)
@@ -154,15 +155,21 @@ router.put('/:id', async (req, res) => {
         //     throw { status: 400, descripcion: 'el email provisto es inválido' }
 
         const nuevo = req.body
-
+        console.log(nuevo)
         if (esUsuarioInvalido(nuevo))
             throw { status: 400, descripcion: 'el usuario posee un formato json invalido o faltan datos' }
 
-        if (req.params.id != nuevo.id)
-            throw { status: 400, descripcion: 'el id provisto no coincide entre el recurso buscado y el nuevo' }
 
+         //   ------<<< SOLO COMENTADO PARA IMPLEMENTAR EN FIREBASE  >>>--------     
+/*         if (req.params.id != nuevo.id)
+            throw { status: 400, descripcion: 'el id provisto no coincide entre el recurso buscado y el nuevo' }
+ */
         const usuariosDAO = daoFactory.getUsuariosDAO()
+
+
         const userActualizado = await usuariosDAO.updateById(req.params.id, nuevo)
+
+
         res.json(userActualizado)
     } catch (err) {
         res.status(err.status).json(err)
@@ -171,7 +178,9 @@ router.put('/:id', async (req, res) => {
 
 function esUsuarioInvalido(usuario) {
     const schema = {
-        id: Joi.number().integer().min(1),
+       //   ------<<< SOLO COMENTADO PARA IMPLEMENTAR EN FIREBASE  >>>--------     
+        //id: Joi.number().integer().min(1),
+        
         name: Joi.string().min(1).required(),
         lastname: Joi.string().min(1).required(),
         zone: Joi.string().min(1).required(),

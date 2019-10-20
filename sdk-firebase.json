@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "gratiferia-app",
+  "private_key_id": "00e5585d4973494453d4bcb62be63acfceaed29c",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCuxggM5Pi/BECK\n7xGixWhtx+4oO8wgX9XGjnFHwhMoHl6RMSa51YlVlqWtkZJIHuIjMsaK5FwwVjcw\nolsEqYNlaDHm0ULfFylAvsV4+DJywfQG1ocr92viz1650gomc7ChYlJupwDTFCPx\nHUXGsdVMdIEB9erMJvhGgJdKgeMMI3pxsh3xNE3oox1aXAo+MwuOMTWEljgL19k8\nJ9VG/n/W0zA2iAEOxVfuupvytjzYKwkJrmKrZa+y9w62i8PdajEqHWcv8reqUkg0\nJRUyLccBLY3RaZYD5n0MXMO/mxzzDazVXOh/GJtNo2qxdq2/tAkgn3Z7FRP7qwhw\nyBekm7GvAgMBAAECggEAA+kcCc3SkwbK7h2zTOt5DrVht5y+6h261s23hl3qHjev\nvgGJI32+EoaWzNXSnbKAAaTQZ6mWA0h3Xt5phibICqwHxQMudkQ6Z0YQsEg9a+8f\n2rDqJvdLGEqAWbNAohbS/1Y7EFn3dsGfAqiF0ZBUSXjbeh1ah5h61BKeHMvgAxSu\nlv8cH2yLeli8K1Hq4obIQpUJV9qnQgKaH0WdyouJ2xaDeGBKOTDVvhRAhH0hLb7v\nxYgVXBYjIuI4AsOCk5kxW4fc8rQ2VVbWKv+dawoH7bbLfj2GqLr0tO/iCRWPaedj\nBcrilsP8qwzrLN5XLjNRJfjRMJjRbujzgnN7ltxvoQKBgQDyVLgAjB13Ilq22ARl\nlAgs0sDrfrCVyZ8iRYnYRtNnpcV0PQD0kAr1wzERCuQw8WT2KqYuO5bGe9BrJPYH\ncRB2v2IzVfufCdTBFetTylVFCH0WtCj5sWP8WxLPODEvCnRQcQrVCrMOAY1G214X\nLPIJJ+oPjd4k5swdOaF4N9rqpQKBgQC4occnAheW3QKwYW/WucxAZZmAnW49Bxlo\nSTPwZyVwI5TmNOz3kQxpV7295HXboplBt0D2HjGl3CJc3jQEpPQqt+QKM/vxY/PE\nhzglf681V3aTAWvjb2rJ5NxcRLneXCtJDWWzo0rV8x/OnCavenCNFY4GLGj/VGtq\nRbZCADs+wwKBgHl4c/96PK7iHpy2rYWJbYuiXSfuim+a8FTKjK1H22KCGvcIOTle\nFtBYdnj3f6j058npWQGlxw9ZMwDyNw1F5J3Rk1TuTcHLuMTMyvhmXNXMyn8d8cgv\n3lG6CTSsEyNkVyeXcnmV8mkb6AhTn9d4JR7nzhDb6TWQJ1Ki98h+HxMtAoGBAKcg\nMcB6oVW7SyLToEPTPTMRhKiqWM4/Ld17Xdt/0qC2ZKMZR2M1VfHJLYTFV3XvsiCN\nO+1NGY3UPPqpXJbTpf1BJdeihK1V16OO7uDqunNjb37UK4/dG+ITGvEeeMzxy3C+\nAtBfwG74O1Nvf4kaIOVknIG0E3sENJMm9Tq7MOW3AoGBALpOfQRO7Y1O/TeDVYQr\n5b4COcNLqVWkADaC6C6LUQ9GMhgSfvN51ThVJattglYIjUVuD4wwoO+gAqtGGHry\n1k0TlJ2sKzKByjAKtyiKoZAl4ZKUEZFftk4/7vrm7u9cZQ1tct5gN9iTfOxLlIBz\nwBM2EH55dh4Yz3sGPxa38u1O\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-z14uv@gratiferia-app.iam.gserviceaccount.com",
+  "client_id": "111819658035608289390",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-z14uv%40gratiferia-app.iam.gserviceaccount.com"
+}

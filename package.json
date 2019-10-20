@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@hapi/joi": "^15.0.2",
+    "cloudinary": "^1.16.0",
     "dotenv": "^8.0.0",
     "express": "^4.16.4",
     "firebase": "^7.2.0",
@@ -21,6 +22,7 @@
     "lodash": "^4.17.11",
     "mssql": "^5.1.0",
     "multer": "^1.4.1",
+    "querybase": "^0.6.0",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.7"
   },
