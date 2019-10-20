@@ -121,9 +121,9 @@ router.post('/', async (req, res) => {
 
         const usuariosDAO = daoFactory.getUsuariosDAO()
 
-        //const usuario = await usuariosDAO.getByEmail(nuevo.email)
+        const usuario = await usuariosDAO.getByEmail(nuevo.email)
 
-        //if(usuario != undefined){throw { status: 400, descripcion: 'Ya existe un usuario con el email provisto' } }
+        if(usuario != undefined){throw { status: 400, descripcion: 'Ya existe un usuario con el email provisto' } }
 
         const userCreado = await usuariosDAO.add(nuevo)
         res.status(201).json(userCreado)
