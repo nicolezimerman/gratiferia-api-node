@@ -52,6 +52,10 @@ async function getById(id) {
 async function add(usuarioNuevo) {
     try{
 
+        const usuarioBuscado = await getByEmail(usuarioNuevo.email)
+        if (usuarioBuscado)
+            throw { status: 400, descripcion: 'Ya existe un usuario con ese email' }
+
         var nuevoUsuario = ref.push();
         nuevoUsuario.set({
 
