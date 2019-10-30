@@ -78,7 +78,7 @@ async function deleteById(id) {
 
 }
 
-//OK
+
 async function updateById(id, usuarioNuevo) {
 
     const usuarioBuscado = await getById(id)
