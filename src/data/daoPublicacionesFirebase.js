@@ -57,13 +57,6 @@ async function add(publicacionNueva) {
 
         var nuevaPublicacion = publicacionNueva
 
-        await cloudinary.v2.uploader.upload(publicacionNueva.image, 
-        async (error, result) => {
-
-            if (!error) {
-
-                nuevaPublicacion.image = result.url
-
                 var refPub = ref.push();
                 await refPub.set({
         
@@ -77,9 +70,7 @@ async function add(publicacionNueva) {
                    reservedby: nuevaPublicacion.reservedby,
                    image: nuevaPublicacion.image
                    })
-            }
-
-        });
+            
 
         return nuevaPublicacion
 
