@@ -253,6 +253,8 @@ function esPublicacionInvalida(publicacion) {
         description: Joi.string().min(1).required(),
         category: Joi.string().min(1).required(),
         zone: Joi.string().min(1).required(),
+        zonelat: Joi.string(),
+        zonelong: Joi.string(),
         keyword: Joi.string().min(1), //ver como validar array
         state: Joi.string().min(1).valid('available','reserved','finished').required(),
 

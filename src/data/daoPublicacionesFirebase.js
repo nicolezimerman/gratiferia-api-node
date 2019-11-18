@@ -64,6 +64,8 @@ async function add(publicacionNueva) {
                    description: nuevaPublicacion.description,
                    category: nuevaPublicacion.category,
                    zone: nuevaPublicacion.zone,
+                   zonelat: nuevaPublicacion.zonelat,
+                   zonelong: nuevaPublicacion.zonelong,
                    keyword: nuevaPublicacion.keyword,
                    state: nuevaPublicacion.state,
                    owner: nuevaPublicacion.owner,
